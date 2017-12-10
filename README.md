@@ -18,7 +18,7 @@ For example the Append() method of the StringBuilder class will be documented he
 ## Content template
 ```
 *Namespace: **{Namespace}***
-# {ClassName}.{MethodName}(*params*)
+# {ClassName}.{MethodName}(*params*) ➜ {ReturnValue}
 {Description}
 ## Remarks
 - {Tip 1}
@@ -27,7 +27,7 @@ For example the Append() method of the StringBuilder class will be documented he
 
 ## Examples
 
-|Object|Call|▶Result|Remarks|
+|Object|Call|➜Result|Remarks|
 |---|---|---|---|
 | ...  | {Member}({param})  | {Result} | {Example notes (optional)}
 | ...  | {Member}({param})  | {Result} | {Example notes (optional)}
