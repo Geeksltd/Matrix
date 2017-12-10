@@ -17,7 +17,7 @@ For example the Append() method of the StringBuilder class will be documented he
 
 ## Content template
 ```
-*Namespace: **...***
+*Namespace: **{Namespace}***
 # {ClassName}.{MethodName}(*params*)
 {Description}
 ## Remarks
