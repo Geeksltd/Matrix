@@ -20,6 +20,8 @@ A VS extension (work in progress) will bring this content up right where you nee
 
 ![](Examples.png)
 
+Which will then show you [this in a pop-up window](System/DateTime/AddDays.md)
+
 ===
 # Want to contribute?
 If you want to contribute to this project please use the following rules.
