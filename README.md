@@ -18,6 +18,8 @@ The philosophy behind it is that what developers are really interested in when l
 # Visual Studio Integration
 A VS extension (work in progress) will bring this content up right where you need it. It will be integrated with the normal Intellisense in Visual Studio and open a pop-up to show the content right there and then.
 
+![](Examples.png)
+
 ===
 # Want to contribute?
 If you want to contribute to this project please use the following rules.
