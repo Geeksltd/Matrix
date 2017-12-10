@@ -27,7 +27,7 @@ For example the Append() method of the StringBuilder class will be documented he
 
 ## Examples
 
-|Object|Call|➜Result|Remarks|
+|Object|Call|Result|Remarks|
 |---|---|---|---|
 | ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
 | ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
