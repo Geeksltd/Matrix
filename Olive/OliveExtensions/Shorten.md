@@ -1,5 +1,5 @@
 *Namespace: **Olive***
-# Guid.Shorten() ➜ returns ShortGuid
+# Guid.Shorten() ➜ *returns ShortGuid*
 Returns a ShortGuid object which provides a shorter string equivalent than the normal Guid.
 When you convert a normal Guid to string, it's **32 characters**, while a ShortGuid is only **22 characters**.
 
@@ -10,8 +10,8 @@ When you convert a normal Guid to string, it's **32 characters**, while a ShortG
 
 ## Examples
 
-|Object|Call|➜Result|Remarks|
+|Object|Call|Result|Remarks|
 |---|---|---|---|
-| d7fedc56-959f-4d5b-8855-6138b534bce4 | .Shorten()  | Vtz-15-VW02IVWE4tTS85A | 
-| aceefe63-42f3-4135-a63a-96d1636f3b8d | .Shorten()  | Y_7urPNCNUGmOpbRY287jQ | 
-| 00000000-0000-0000-0000-000000000000 | .Shorten()  | **TODO:????????** | The value of Guid.Empty
+| d7fedc56-959f-4d5b-8855-6138b534bce4 | .Shorten()  | ➜ Vtz-15-VW02IVWE4tTS85A | 
+| aceefe63-42f3-4135-a63a-96d1636f3b8d | .Shorten()  | ➜ Y_7urPNCNUGmOpbRY287jQ | 
+| 00000000-0000-0000-0000-000000000000 | .Shorten()  | ➜ **TODO:????????** | The value of Guid.Empty
