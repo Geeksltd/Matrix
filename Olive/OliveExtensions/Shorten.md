@@ -1,5 +1,5 @@
 *Namespace: **Olive***
-# {Guid}.{Shorten}() ➜ returns ShortGuid
+# Guid.Shorten() ➜ returns ShortGuid
 Returns a ShortGuid object which provides a shorter string equivalent than the normal Guid.
 When you convert a normal Guid to string, it's **32 characters**, while a ShortGuid is only **22 characters**.
 
