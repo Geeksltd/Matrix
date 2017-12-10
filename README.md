@@ -18,7 +18,7 @@ For example the Append() method of the StringBuilder class will be documented he
 ## Content template
 ```
 *Namespace: **{Namespace}***
-# {ClassName}.{MethodName}(*params*) ➜ {ReturnValue}
+# {ClassName}.{MethodName}(*params*) ➜ *returns {ReturnValue}*
 {Description}
 ## Remarks
 - {Tip 1}
@@ -29,8 +29,8 @@ For example the Append() method of the StringBuilder class will be documented he
 
 |Object|Call|➜Result|Remarks|
 |---|---|---|---|
-| ...  | {Member}({param})  | {Result} | {Example notes (optional)}
-| ...  | {Member}({param})  | {Result} | {Example notes (optional)}
+| ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
+| ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
 
 [More details](https://docs.microsoft.com/en-us/dotnet/api/{namespace}.{class}.{member})
 ```
