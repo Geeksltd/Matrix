@@ -18,7 +18,7 @@ The philosophy behind it is that what developers are really interested in when l
 # Visual Studio Integration
 A VS extension (work in progress) will bring this content up right where you need it. It will be integrated with the normal Intellisense in Visual Studio and open a pop-up to show the content right there and then.
 
-=====================
+===
 # Want to contribute?
 If you want to contribute to this project please use the following rules.
 
@@ -52,7 +52,7 @@ For example the Append() method of the StringBuilder class will be documented he
 [More details](https://docs.microsoft.com/en-us/dotnet/api/{namespace}.{class}.{member})
 ```
 
-## Editing guidelines
+### Editing guidelines
 - The top description should be focused on the high level reason why that thing exists. That helps the learner to quickly grasp what this member is, without worrying about the details of HOW it's implemented.
 - All further details about how it's implemented, or tips should go under Remarks.
 - Under *examples*, make sure you include edge cases. Often a learner needs to know how the method handles special cases such as null, zero, negative value, etc. This will help them to avoid writing unnecessary validation logic in their code if the target method can already handle it nicely.
