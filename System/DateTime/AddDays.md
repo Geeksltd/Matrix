@@ -2,7 +2,8 @@
 # DateTime.AddDays(*double*) ➜ *returns DateTime*
 Returns a new DateTime that adds the specified number of days to the value of this instance.
 ## Remarks
-- It does not change the value of this DateTime. Instead, it returns a new DateTime whose value is the result of this operation.
+- It does not change the value of this DateTime.
+- Instead, it returns a new DateTime whose value is the result of this operation.
 - The value parameter is rounded to the **nearest millisecond**.
 - It takes into account **leap years** and the number of days in a month when performing date arithmetic.
 
