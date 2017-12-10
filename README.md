@@ -1,21 +1,38 @@
+# Background
+When writing code, developers need to discover APIs as they go. But often they don't use the official MSDN documentation because they are:
+- Cluttered and noisy in format
+- Often the definitions are written in a complex language.
+- Examples are rarely there, and often are too noisy.
+- They don't show all the different scenarios of using the method.
+
 # .NET Cheat Sheet
-A quick cheat sheet for all commonly used .NET Apis.
+This is a new learning concept. Basically a cheat sheet for all commonly used .NET Apis.
+The philosophy behind it is that what developers are really interested in when looking through methods in the .NET API is simply clear examples. That's how their mind often works.
 
+- What are typical, happy scenarios
+- What happens in edge cases?
+- What happens in cases X, Y, Z...
+
+> This project will provide documentation exactly in that format! It's basically a list of tips, and examples for each API element (method, property, etc)/
+
+# Visual Studio Integration
+A VS extension (work in progress) will bring this content up right where you need it. It will be integrated with the normal Intellisense in Visual Studio and open a pop-up to show the content right there and then.
+
+=====================
+# Want to contribute?
+If you want to contribute to this project please use the following rules.
+
+### Path Structure
 For each method or property, it provides one MD file with all the information you need to use it:
-- Simple description
-- Examples
-- Edge cases
-
 They can be looked up right inside Visual Studio using the Cheat Visual Studio extension when using each method.
 
-## Path Structure
 Each method, property or event, should be created as a .MD file with the following exact path:
 {Namespace}/{Class}/{Member}.md
 
 For example the Append() method of the StringBuilder class will be documented here:
 > System/Text/StringBuilder/Append.md
 
-## Content template
+### Content template
 ```
 *Namespace: **{Namespace}***
 # {ClassName}.{MethodName}(*params*) ➜ *returns {ReturnValue}*
