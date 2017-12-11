@@ -61,3 +61,12 @@ For example the Append() method of the StringBuilder class will be documented he
 - All further details about how it's implemented, or tips should go under Remarks.
 - Under *examples*, make sure you include edge cases. Often a learner needs to know how the method handles special cases such as null, zero, negative value, etc. This will help them to avoid writing unnecessary validation logic in their code if the target method can already handle it nicely.
 - Give as much attention to the examples as possible. That's the main way the learner will use to understand the method. Use easy to follow and simple examples.
+
+### Sources
+- Microsoft currently has two websites for .NET API documentation. For example for DateTime.AddDays() method there is [this](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.adddays?view=netframework-4.7.1) and [this](https://msdn.microsoft.com/en-us/library/ee424859.aspx).
+- Each one of the above sources can have different content, different wording, examples or details to explain the API.
+- You should check out both of them in producing the content for this website, to ensure all useful information is transferred.
+**Do not blindly copy and paste. You should change the format based on:**:
+- Simplify the wording, so they are down-to-earth and quicker to grasp.
+- For every tip, remark, condition or exception, demonstrate that with an example and move the remarks to the row of that example.
+- If it's not possible or simple to show a remark or tip with an example, only then add a textual remark for that. But always favour examples to convey the knowledge.
