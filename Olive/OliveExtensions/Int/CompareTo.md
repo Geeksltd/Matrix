@@ -1,4 +1,4 @@
-# Number.CompareTo() ➜ *returns -1, 0 or 1*
+# Int.CompareTo() ➜ *returns -1, 0 or 1*
 Returns a number(-1,0,1) depending on what are the values of two input parameters.
 
 ## Examples
