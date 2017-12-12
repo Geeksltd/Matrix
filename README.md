@@ -22,7 +22,13 @@ A VS extension (work in progress) will **bring up this content** right **where y
 
 Which will then show you [this in a pop-up window](Docs/System/DateTime/AddDays.md)
 
-# Want to contribute?
+# Why Contribute?
+- Deepen and improve your own knowledge of the .NET framework.
+- Improve the lives of the the global .NET community and make their lives easier.
+- Indirectly improve the quality of software applications across the world.
+- Geeks Ltd, a software development company in London, UK, is proud to sponsor this project. We can compensate you for your time.
+
+# How to contribute?
 If you want to contribute to this project please use the following rules.
 It's recommended that you install this Visual Studio Extension used for [editing markdown files](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor).
 
@@ -83,9 +89,3 @@ For example the Append() method of the StringBuilder class will be documented at
 
 - If it's not possible or useful to show any particular remark or tip with an example, then add a textl remark item for that. But always favour examples first.
 
-
-# Why Contribute?
-- Deepen and improve your own knowledge of the .NET framework.
-- Improve the lives of the the global .NET community and make their lives easier.
-- Indirectly improve the quality of software applications across the world.
-- Geeks Ltd, a software development company in London, UK, is proud to sponsor this project. We can compensate you for your time.
