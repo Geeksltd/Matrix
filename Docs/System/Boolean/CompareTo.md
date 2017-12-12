@@ -12,11 +12,11 @@ Returns a number indicating whether this boolean value is the same (0), smaller 
 | false | .CompareTo(false)  | ➜ 0 | Again, False is the same as False.
 
 ## Special Scenarios
-CompareTo() has another overload which takes an "Object" as input.
+CompareTo() has another overload which takes an "Object" as parameter.
 
 |Object|Call|Result|Remarks|
 |---|---|---|---|
-| true | .CompareTo(null)  | ➜ 1 |  True is considered bigger than NULL. 
-| false | .CompareTo(null)  | ➜ ???? |  ***TODO: Test.***
-| false | .CompareTo(*{"AnyOtherObjectType"}*)  | ➜ ArgumentException| The actual value of the object parameter should be either a boolean, or null.
-| false | .CompareTo(*(bool?)true*)  | ➜ ???? |  ***TODO: Test Nullable bool.***
+| true | .CompareTo(null)  | ➜ 1 | True is considered bigger than NULL. 
+| false | .CompareTo(null)  | ➜ 1 | Strangely, **false is considered smaller than null**
+| false | .CompareTo(*(bool?)true*)  | ➜ -1 |  The object parameter can be nullable too.
+| false | .CompareTo(*{"AnyOtherObjectType"}*)  | ➜ ArgumentException| The actual value of the object parameter should be either a bool, bool? or null.

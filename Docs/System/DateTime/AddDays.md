@@ -5,7 +5,7 @@ Returns a new DateTime that adds the specified number of days to the value of th
 - It returns a new DateTime, but does not change the value of this DateTime (as it's immutable anyway).
 - It takes into account **leap years** and the number of days in a month when performing date arithmetic.
 
-## Examples
+## Normal Scenarios
 
 |Object|Call|Result|Remarks|
 |---|---|---|---|
@@ -15,7 +15,7 @@ Returns a new DateTime that adds the specified number of days to the value of th
 | 01 Jan 2010  | .AddDays(-1)  | ➜ 31 Dec 2009| Negative works too|
 
 
-## Special cases
+## Special Scenarios
 |Object|Call|Result|Remarks|
 |---|---|---|---|
 | 01 Jan 0001  | .AddDays(-1)  | ➜ *ArgumentOutOfRangeException* | Can't go below DateTime.MinValue|

@@ -18,9 +18,9 @@ This is a new concept for learning APIs. The philosophy behind it is that *what 
 # Visual Studio Integration
 A VS extension (work in progress) will **bring up this content** right **where you need it**. It will be integrated with the normal Intellisense in Visual Studio and open a pop-up to show the content right there and then.
 
-![](Examples.png)
+![](Docs/Examples.png)
 
-Which will then show you [this in a pop-up window](System/DateTime/AddDays.md)
+Which will then show you [this in a pop-up window](Docs/System/DateTime/AddDays.md)
 
 # Want to contribute?
 If you want to contribute to this project please use the following rules.
@@ -33,8 +33,8 @@ They can be looked up right inside Visual Studio using the Cheat Visual Studio e
 Each method, property or event, should be created as a .MD file with the following exact path:
 {Namespace}/{Class}/{Member}.md
 
-For example the Append() method of the StringBuilder class will be documented here:
-> System/Text/StringBuilder/Append.md
+For example the Append() method of the StringBuilder class will be documented at the following address in this repository:
+> /Docs/System/Text/StringBuilder/Append.md
 
 ### Content template
 ```

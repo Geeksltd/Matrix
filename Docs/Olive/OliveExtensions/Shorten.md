@@ -8,7 +8,7 @@ When you convert a normal Guid to string, it's **32 characters**, while a ShortG
 - ShortGuid uses the characters '0' to '9', 'a' to 'z', 'A' to 'Z' and also '-' and '_'. This is a range of 64 characters.
 - Unlike normal Guid, the string value of ShortGuid is **case-sensitive**.
 
-## Examples
+## Scenarios
 
 |Object|Call|Result|Remarks|
 |---|---|---|---|
