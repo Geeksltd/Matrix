@@ -17,6 +17,6 @@ CompareTo() has another overload which takes an "Object" as parameter.
 |Object|Call|Result|Remarks|
 |---|---|---|---|
 | true | .CompareTo(null)  | ➜ 1 | True is considered bigger than NULL. 
-| false | .CompareTo(null)  | ➜ 1 | Strangely, **false is considered smaller than null**
+| false | .CompareTo(null)  | ➜ 1 | Strangely, **false is considered bigger than null**
 | false | .CompareTo(*(bool?)true*)  | ➜ -1 |  The object parameter can be nullable too.
 | false | .CompareTo(*{"AnyOtherObjectType"}*)  | ➜ ArgumentException| The actual value of the object parameter should be either a bool, bool? or null.
