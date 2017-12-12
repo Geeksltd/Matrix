@@ -5,15 +5,15 @@ When writing code, developers need to discover APIs as they go. But often they d
 - Examples are rarely there, and can be unnecessarily long. You have to read a lot of code to see the actual point.
 - The examples don't show all the different scenarios of using the method.
 
-# .NET Cheat Sheet
-This is a new learning concept. Basically a cheat sheet for all commonly used .NET Apis.
-The philosophy behind it is that *what developers are really interested in* when looking through methods in the .NET API is simply **clear examples**. That's one's mind often works:
+# .NET API Matrix
+This is a new concept for learning APIs. The philosophy behind it is that *what developers are really interested in* when looking through methods in the .NET API is **clear examples** of all the **differnt scenarios for using it**. That's one's mind often works:
 
-- What are typical, happy scenarios
-- What happens in edge cases?
-- What happens in cases X, Y, Z...
+- What are typical, happy scenarios?
+- What happens in edge case A?
+- What happens in edge case B?
+- ...
 
-> This project will provide documentation exactly in that format. It's basically a list of tips, and examples for each API element (method, property, etc).
+> This project will provide documentation exactly in that format. It's basically a list of scenarios for using each API element (method, property, etc) driven by examples.
 
 # Visual Studio Integration
 A VS extension (work in progress) will **bring up this content** right **where you need it**. It will be integrated with the normal Intellisense in Visual Studio and open a pop-up to show the content right there and then.
@@ -24,6 +24,7 @@ Which will then show you [this in a pop-up window](System/DateTime/AddDays.md)
 
 # Want to contribute?
 If you want to contribute to this project please use the following rules.
+It's recommended that you install this Visual Studio Extension used for [editing markdown files](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor).
 
 ### Path Structure
 For each method or property, it provides one MD file with all the information you need to use it:
