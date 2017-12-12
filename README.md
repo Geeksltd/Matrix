@@ -39,34 +39,50 @@ For example the Append() method of the StringBuilder class will be documented at
 ### Content template
 ```
 *Namespace: **{Namespace}***
-# {ClassName}.{MethodName}(*params*) ➜ *returns {ReturnValue}*
-{Description}
-## Remarks
-- {Tip 1}
-- {Tip 2}
-- ...
+# {ClassName}.{MethodName}(*params*) ➜ *returns {ReturnType}*
 
-## Examples
+*** {Description:::: TODO: Very high level and simple explanation. If possible explain the reason why this method exists.}
+
+## Normal Scenarios
 
 |Object|Call|Result|Remarks|
 |---|---|---|---|
 | ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
 | ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
 
-[More details](https://docs.microsoft.com/en-us/dotnet/api/{namespace}.{class}.{member})
+## Special Scenarios
+
+|Object|Call|Result|Remarks|
+|---|---|---|---|
+| ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
+| ...  | .{MethodName}({param})  | ➜ {Result} | {Example notes (optional)}
+
+## Remarks
+***TODO: Add tips which cannot be demonstrated with an example here.
+- {Tip 1}
+- {Tip 2}
+- ...
 ```
 
-### Editing guidelines
-- The top description should be focused on the high level reason why that thing exists. That helps the learner to quickly grasp what this member is, without worrying about the details of HOW it's implemented.
-- All further details about how it's implemented, or tips should go under Remarks.
-- Under *examples*, make sure you include edge cases. Often a learner needs to know how the method handles special cases such as null, zero, negative value, etc. This will help them to avoid writing unnecessary validation logic in their code if the target method can already handle it nicely.
-- Give as much attention to the examples as possible. That's the main way the learner will use to understand the method. Use easy to follow and simple examples.
+### Scenarios (Normal / Special)
 
-### Sources
-- Microsoft currently has two websites for .NET API documentation. For example for DateTime.AddDays() method there is [this](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.adddays?view=netframework-4.7.1) and [this](https://msdn.microsoft.com/en-us/library/ee424859.aspx).
-- Each one of the above sources can have different content, different wording, examples or details to explain the API.
+- Try to include every possible scenario you can think of. Use easy to follow and simple examples.
+
+- Under *Special Scenarios*, include every possible edge case, null, zero, negative values, .... This will help the learner to avoid writing unnecessary validation logic in their code if the target method can already handle it nicely.
+
+### How to create it?
+- Start from the Microsoft .NET API documentation website. See[ example for DateTime.AddDays() method](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.adddays?view=netframework-4.7.1)
+
+- Use it to write the top description. But simplify the wording if you can. Do not include details that are confusing, too deep, or not relevant to simply using it.
+
+- For every part of their *description*, *remarks* and *exceptoins*, define an example, and add that information description or remark as the notes for that particular example.
+
+- Then think about all kinds of edge cases and scenarios which are not covered in the Microsoft docs, and add examples for those too.
+
+> There is a small Console application named **Check** where you can actually test every scenario to ensure your examples documentation is valid.
+
 - You should check out both of them in producing the content for this website, to ensure all useful information is transferred.
-**Do not blindly copy and paste. You should change the format based on:**:
-- Simplify the wording, so they are down-to-earth and quicker to grasp.
-- For every tip, remark, condition or exception, demonstrate that with an example and move the remarks to the row of that example.
-- If it's not possible or simple to show a remark or tip with an example, only then add a textual remark for that. But always favour examples to convey the knowledge.
+
+- If it's not possible or simple to show any particular remark or tip with an example, then add a textl remark item for that. But always favour examples first.
+
+
