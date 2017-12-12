@@ -81,8 +81,6 @@ For example the Append() method of the StringBuilder class will be documented at
 
 > There is a small Console application named **Check** where you can actually test every scenario to ensure your examples documentation is valid.
 
-- You should check out both of them in producing the content for this website, to ensure all useful information is transferred.
-
-- If it's not possible or simple to show any particular remark or tip with an example, then add a textl remark item for that. But always favour examples first.
+- If it's not possible or useful to show any particular remark or tip with an example, then add a textl remark item for that. But always favour examples first.
 
 
