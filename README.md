@@ -84,3 +84,8 @@ For example the Append() method of the StringBuilder class will be documented at
 - If it's not possible or useful to show any particular remark or tip with an example, then add a textl remark item for that. But always favour examples first.
 
 
+# Why Contribute?
+- Deepen and improve your own knowledge of the .NET framework.
+- Improve the lives of the the global .NET community and make their lives easier.
+- Indirectly improve the quality of software applications across the world.
+- Geeks Ltd, a software development company in London, UK, is proud to sponsor this project. We can compensate you for your time.
