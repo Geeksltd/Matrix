@@ -19,4 +19,4 @@ Returns a new DateTime that adds the specified number of AddMilliseconds to the 
 
 ## Remarks
 - It returns a new DateTime, but does not change the value of this DateTime (as it's immutable anyway).
-- fractional milliseconds are rounded before performing the addition; For example, 1.5 is equivalent to 1 milliseconds and 5000 ticks, where one millisecond = 10000 ticks.
+- fractional milliseconds are rounded before performing the addition; For example, 1.5 is equivalent to 20000 ticks, where one millisecond = 10000 ticks.
