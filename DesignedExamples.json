@@ -1,7 +1,13 @@
 {
    "System.DateTime": {
       "AddDays(double)": { 
-         "23/01/2017" : ["1", "0", "-1"]         
+         "23/01/2017" : ["1", "0", "-1"],
+         "01/01/0001" : ["-1"]
+      }
+   }
+   "System.Int32": {
+      "CompareTo(object)": { 
+         "1" : ["(string)1", "(int)1", "(int?)1", "{null}"]
       }
    }
 }
