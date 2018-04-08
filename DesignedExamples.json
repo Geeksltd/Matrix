@@ -1,0 +1,7 @@
+{
+   "System.DateTime": {
+      "AddDays(double)": { 
+         "23/01/2017" : ["1", "0", "-1"]         
+      }
+   }
+}
