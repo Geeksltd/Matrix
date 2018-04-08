@@ -1,13 +1,11 @@
+// Note: For each method, if there is an entry in this file, rather than automatically generating examples, only the examples 
+// in this list will be used.
 {
-   "System.DateTime": {
-      "AddDays(double)": { 
-         "23/01/2017" : ["1", "0", "-1"],
-         "01/01/0001" : ["-1"]
-      }
-   }
-   "System.Int32": {
-      "CompareTo(object)": { 
-         "1" : ["(string)1", "(int)1", "(int?)1", "{null}"]
-      }
+   "System.DateTime.AddDays(double)": {      
+      "23/01/2017" : ["1", "0", "-1"],
+      "01/01/0001" : ["-1"]      
+   },
+   "System.Int32.CompareTo(object)": { 
+      "1" : ["(string)1", "(int)1", "(int?)1", "{null}"]      
    }
 }
