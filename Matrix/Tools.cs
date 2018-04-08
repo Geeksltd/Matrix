@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using EnvDTE80;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using EnvDTE;
-using EnvDTE80;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Text;
 using VSLangProj;
 
@@ -18,23 +16,23 @@ namespace Matrix
     {
         public static ISymbol CurrentSymbol(SnapshotSpan span)
         {
-            DTE2 dte = (DTE2)Package.GetGlobalService(typeof(SDTE));
+            var dte = (DTE2)Package.GetGlobalService(typeof(SDTE));
             var doc = (EnvDTE.TextDocument)dte.ActiveDocument.Object("TextDocument");
-            EnvDTE.Project curProj = dte.ActiveDocument.ProjectItem.ContainingProject;
-            VSProject vsCurProj = (VSProject)curProj.Object;
+            var curProj = dte.ActiveDocument.ProjectItem.ContainingProject;
+            var vsCurProj = (VSProject)curProj.Object;
             var references = new List<MetadataReference>();
             foreach (VSLangProj.Reference refrence in vsCurProj.References)
-            {
                 references.Add(MetadataReference.CreateFromFile(refrence.Path));
-            }
-            string StrCode = doc.StartPoint.CreateEditPoint().GetText(doc.EndPoint);
-            var syntaxTree = CSharpSyntaxTree.ParseText(StrCode);
+
+
+            var strCode = doc.StartPoint.CreateEditPoint().GetText(doc.EndPoint);
+            var syntaxTree = CSharpSyntaxTree.ParseText(strCode);
             var compilation = CSharpCompilation.Create("zarif").AddReferences(references).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location)).AddSyntaxTrees(syntaxTree);
-            
-                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var synTree = syntaxTree.GetRoot();
             var synNod = synTree.DescendantNodes().Where(x => x.Span == new TextSpan(span.Start, span.Length)).FirstOrDefault();
-            //------------------------------
+            // ------------------------------
             if (synNod != null)
             {
                 var symbol = semanticModel.GetSymbolInfo(synNod);
@@ -46,6 +44,7 @@ namespace Matrix
                     }
                 }
             }
+
             return null;
         }
 
@@ -63,15 +62,15 @@ namespace Matrix
             }
             else if (TypeCode.UInt32.ToString().ToUpper() == typeName)
             {
-                return typeof(UInt32);
+                return typeof(uint);
             }
             else if (TypeCode.UInt64.ToString().ToUpper() == typeName)
             {
-                return typeof(UInt64);
+                return typeof(ulong);
             }
             else if (TypeCode.UInt16.ToString().ToUpper() == typeName)
             {
-                return typeof(UInt16);
+                return typeof(ushort);
             }
             else if (TypeCode.String.ToString().ToUpper() == typeName)
             {
@@ -79,7 +78,7 @@ namespace Matrix
             }
             else if (TypeCode.Single.ToString().ToUpper() == typeName)
             {
-                return typeof(Single);
+                return typeof(float);
             }
             else if (TypeCode.SByte.ToString().ToUpper() == typeName)
             {
@@ -128,6 +127,5 @@ namespace Matrix
 
             return null;
         }
-
     }
 }

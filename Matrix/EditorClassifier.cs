@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Reflection;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
-using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Matrix
 {
     class TestQuickInfoSource : IQuickInfoSource
     {
-        private TestQuickInfoSourceProvider m_provider;
-        private ITextBuffer m_subjectBuffer;
+        TestQuickInfoSourceProvider m_provider;
+        ITextBuffer m_subjectBuffer;
 
         public TestQuickInfoSource(TestQuickInfoSourceProvider provider, ITextBuffer subjectBuffer)
         {
             m_provider = provider;
             m_subjectBuffer = subjectBuffer;
-
         }
 
         /// Estefade baraye tashkhis kalame jari va jostejoye tozihat marboot be an
@@ -31,19 +27,19 @@ namespace Matrix
             try
             {
                 Debug.WriteLine("AugmentQuickInfoSession Starts");
-                SnapshotPoint ? subjectTriggerPoint = session.GetTriggerPoint(m_subjectBuffer.CurrentSnapshot);
+                var subjectTriggerPoint = session.GetTriggerPoint(m_subjectBuffer.CurrentSnapshot);
                 if (!subjectTriggerPoint.HasValue)
                 {
                     applicableToSpan = null;
                     return;
                 }
 
-                ITextSnapshot currentSnapshot = subjectTriggerPoint.Value.Snapshot;
-                SnapshotSpan querySpan = new SnapshotSpan(subjectTriggerPoint.Value, 0);
+                var currentSnapshot = subjectTriggerPoint.Value.Snapshot;
+                var querySpan = new SnapshotSpan(subjectTriggerPoint.Value, 0);
 
-                ITextStructureNavigator navigator = m_provider.NavigatorService.GetTextStructureNavigator(m_subjectBuffer);
-                TextExtent extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
-                string searchText = extent.Span.GetText();
+                var navigator = m_provider.NavigatorService.GetTextStructureNavigator(m_subjectBuffer);
+                var extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
+                var searchText = extent.Span.GetText();
 
                 Debug.WriteLine("Befor Tools.CurrentSymbol");
                 var symbol = Tools.CurrentSymbol(extent.Span);
@@ -51,32 +47,32 @@ namespace Matrix
                 if (symbol != null)
                 {
                     Debug.WriteLine("Befor new SamplePresenter");
-                    SamplePresenter sp = new SamplePresenter(symbol);
+                    var sp = new SamplePresenter(symbol);
                     Debug.WriteLine("After new SamplePresenter");
                     if (sp.FlagOk)
                     {
                         Debug.WriteLine("Befor new LinkButton");
-                        LinkButton lnkBtn = new LinkButton();
-                        lnkBtn.FormCaption = symbol.OriginalDefinition.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat);
+                        var lnkBtn = new LinkButton
+                        {
+                            FormCaption = symbol.OriginalDefinition.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat)
+                        };
                         Debug.WriteLine("After new LinkButton");
                         qiContent.Insert(0, lnkBtn);
                     }
                 }
-
             }
             catch (Exception err)
             {
-                StackTrace st = new StackTrace(err);
+                var st = new StackTrace(err);
                 Debug.WriteLine(st.ToString());
             }
             finally
             {
                 applicableToSpan = null;
             }
-
         }
 
-        private bool m_isDisposed;
+        bool m_isDisposed;
         public void Dispose()
         {
             if (!m_isDisposed)
@@ -107,10 +103,10 @@ namespace Matrix
 
     internal class TestQuickInfoController : IIntellisenseController
     {
-        private ITextView m_textView;
-        private IList<ITextBuffer> m_subjectBuffers;
-        private TestQuickInfoControllerProvider m_provider;
-        private IQuickInfoSession m_session;
+        ITextView m_textView;
+        IList<ITextBuffer> m_subjectBuffers;
+        TestQuickInfoControllerProvider m_provider;
+        IQuickInfoSession m_session;
 
         internal TestQuickInfoController(ITextView textView, IList<ITextBuffer> subjectBuffers, TestQuickInfoControllerProvider provider)
         {
@@ -118,13 +114,13 @@ namespace Matrix
             m_subjectBuffers = subjectBuffers;
             m_provider = provider;
 
-            m_textView.MouseHover += this.OnTextViewMouseHover;
+            m_textView.MouseHover += OnTextViewMouseHover;
         }
 
-        private void OnTextViewMouseHover(object sender, MouseHoverEventArgs e)
+        void OnTextViewMouseHover(object sender, MouseHoverEventArgs e)
         {
-            //find the mouse position by mapping down to the subject buffer
-            SnapshotPoint? point = m_textView.BufferGraph.MapDownToFirstMatch
+            // find the mouse position by mapping down to the subject buffer
+            var point = m_textView.BufferGraph.MapDownToFirstMatch
                  (new SnapshotPoint(m_textView.TextSnapshot, e.Position),
                 PointTrackingMode.Positive,
                 snapshot => m_subjectBuffers.Contains(snapshot.TextBuffer),
@@ -132,24 +128,25 @@ namespace Matrix
 
             if (point != null)
             {
-                ITrackingPoint triggerPoint = point.Value.Snapshot.CreateTrackingPoint(point.Value.Position,
+                var triggerPoint = point.Value.Snapshot.CreateTrackingPoint(point.Value.Position,
                 PointTrackingMode.Positive);
 
                 if (!m_provider.QuickInfoBroker.IsQuickInfoActive(m_textView))
                 {
                     m_session = m_provider.QuickInfoBroker.TriggerQuickInfo(m_textView, triggerPoint, true);
                 }
-
             }
         }
+
         public void Detach(ITextView textView)
         {
             if (m_textView == textView)
             {
-                m_textView.MouseHover -= this.OnTextViewMouseHover;
+                m_textView.MouseHover -= OnTextViewMouseHover;
                 m_textView = null;
             }
         }
+
         public void ConnectSubjectBuffer(ITextBuffer subjectBuffer)
         {
         }

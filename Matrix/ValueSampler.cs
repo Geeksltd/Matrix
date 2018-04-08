@@ -13,11 +13,11 @@ namespace Matrix
         {
             object result = null;
 
-            if (t == typeof(int) || t == typeof(Int16) || t == typeof(Int32) || t == typeof(Int64) || t == typeof(sbyte))
+            if (t == typeof(int) || t == typeof(short) || t == typeof(int) || t == typeof(long) || t == typeof(sbyte))
             {
                 result = rnd.Next(-99, 99);
             }
-            else if (t == typeof(uint) || t == typeof(UInt16) || t == typeof(UInt32) || t == typeof(UInt64) || t == typeof(byte))
+            else if (t == typeof(uint) || t == typeof(ushort) || t == typeof(uint) || t == typeof(ulong) || t == typeof(byte))
             {
                 result = rnd.Next(0, 99);
             }
@@ -27,8 +27,8 @@ namespace Matrix
             }
             else if (t == typeof(DateTime))
             {
-                DateTime start = new DateTime(1995, 1, 1);
-                int range = (DateTime.Today - start).Days;
+                var start = new DateTime(1995, 1, 1);
+                var range = (DateTime.Today - start).Days;
                 result = start.AddDays(rnd.Next(range));
             }
 
