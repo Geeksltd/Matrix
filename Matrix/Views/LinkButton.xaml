@@ -10,14 +10,14 @@
         <Button x:Name="sampleCmd" Margin="0" Content="See Samples" Cursor="Hand" Click="sampleCmd_Click" Background="#FFFBFB08">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <TextBlock Background="#FFFBFB08">
+                    <TextBlock Background="Transparent">
                         <ContentPresenter/>
                     </TextBlock>
                 </ControlTemplate>
             </Button.Template>
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="Blue" />
+                    <Setter Property="Foreground" Value="#FFFBFB08" />
                     <Setter Property="HorizontalAlignment" Value="Right"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">

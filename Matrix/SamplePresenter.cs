@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using EnvDTE80;
+using Matrix.Logic;
+using Matrix.Utils;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using VSLangProj;
@@ -30,7 +32,7 @@ namespace Matrix
         public SamplePresenter(Microsoft.CodeAnalysis.ISymbol symbol)
         {
             var asmName = symbol.ContainingAssembly.Name;
-            if (asmName == "zarif")
+            if (asmName == "MyAshes")
             {
                 flagOk = false;
                 return;

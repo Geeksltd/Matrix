@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
+using Matrix.Logic;
 
 namespace Matrix
 {
@@ -20,8 +21,7 @@ namespace Matrix
             m_provider = provider;
             m_subjectBuffer = subjectBuffer;
         }
-
-        /// Estefade baraye tashkhis kalame jari va jostejoye tozihat marboot be an
+        
         public void AugmentQuickInfoSession(IQuickInfoSession session, IList<object> qiContent, out ITrackingSpan applicableToSpan)
         {
             try
@@ -34,37 +34,25 @@ namespace Matrix
                     return;
                 }
 
-                var currentSnapshot = subjectTriggerPoint.Value.Snapshot;
-                var querySpan = new SnapshotSpan(subjectTriggerPoint.Value, 0);
-
                 var navigator = m_provider.NavigatorService.GetTextStructureNavigator(m_subjectBuffer);
                 var extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
-                var searchText = extent.Span.GetText();
-
-                Debug.WriteLine("Befor Tools.CurrentSymbol");
-                var symbol = Tools.CurrentSymbol(extent.Span);
-                Debug.WriteLine("After Tools.CurrentSymbol");
+                var symbol = CodeAnalysis.GetCurrentSymbol(extent.Span);
                 if (symbol != null)
                 {
-                    Debug.WriteLine("Befor new SamplePresenter");
                     var sp = new SamplePresenter(symbol);
-                    Debug.WriteLine("After new SamplePresenter");
                     if (sp.FlagOk)
                     {
-                        Debug.WriteLine("Befor new LinkButton");
                         var lnkBtn = new LinkButton
                         {
                             FormCaption = symbol.OriginalDefinition.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat)
                         };
-                        Debug.WriteLine("After new LinkButton");
                         qiContent.Insert(0, lnkBtn);
                     }
                 }
             }
             catch (Exception err)
             {
-                var st = new StackTrace(err);
-                Debug.WriteLine(st.ToString());
+                Debug.WriteLine(err .ToString() + new StackTrace(err).ToString());
             }
             finally
             {
