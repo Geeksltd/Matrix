@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EnvDTE80;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -18,21 +20,23 @@ namespace Matrix
         {
             var dte = (DTE2)Package.GetGlobalService(typeof(SDTE));
             var doc = (EnvDTE.TextDocument)dte.ActiveDocument.Object("TextDocument");
-            var curProj = dte.ActiveDocument.ProjectItem.ContainingProject;
-            var vsCurProj = (VSProject)curProj.Object;
-            var references = new List<MetadataReference>();
-            foreach (VSLangProj.Reference refrence in vsCurProj.References)
-                references.Add(MetadataReference.CreateFromFile(refrence.Path));
+            //var curProj = dte.ActiveDocument.ProjectItem.ContainingProject;
+            //var vsCurProj = (VSProject)curProj.Object;
+            //var references = new List<MetadataReference>();
+            //foreach (VSLangProj.Reference refrence in vsCurProj.References)
+            //    if (!string.IsNullOrEmpty(refrence.Path))
+            //        if (File.Exists(refrence.Path))
+            //            references.Add(MetadataReference.CreateFromFile(refrence.Path));
 
 
             var strCode = doc.StartPoint.CreateEditPoint().GetText(doc.EndPoint);
             var syntaxTree = CSharpSyntaxTree.ParseText(strCode);
-            var compilation = CSharpCompilation.Create("zarif").AddReferences(references).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location)).AddSyntaxTrees(syntaxTree);
-
+            //var compilation = CSharpCompilation.Create("zarif").AddReferences(references).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location)).AddSyntaxTrees(syntaxTree);
+            var mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
+            var compilation = CSharpCompilation.Create("MyAshes", syntaxTrees: new[] { syntaxTree }, references: new[] { mscorlib });
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
-            var synTree = syntaxTree.GetRoot();
-            var synNod = synTree.DescendantNodes().Where(x => x.Span == new TextSpan(span.Start, span.Length)).FirstOrDefault();
-            // ------------------------------
+            var root = syntaxTree.GetRoot();
+            var synNod = root.DescendantNodes().Where(x => x.FullSpan == new TextSpan(span.Start, span.Length)).FirstOrDefault(); //.OfType<InvocationExpressionSyntax>()
             if (synNod != null)
             {
                 var symbol = semanticModel.GetSymbolInfo(synNod);
