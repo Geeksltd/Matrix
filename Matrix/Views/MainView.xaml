@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Matrix.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Matrix.Views"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="450" d:DesignWidth="450">
+    <UserControl.Resources>
+        <Style x:Key="TileTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="IdentifierTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Regular" />
+
+            <Setter Property="Margin" Value="5,0,0,0" />
+        </Style>
+        <Style x:Key="DescriptionTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="27">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TileTextStyle}">Type :</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TileTextStyle}">Method :</TextBlock>
+            
+            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource IdentifierTextStyle}" Text="System" />
+                <TextBlock Margin="0" Style="{StaticResource IdentifierTextStyle}" Text="." />
+                <TextBlock Foreground="Green" Style="{StaticResource IdentifierTextStyle}" Text="DateTime" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Foreground="Green" Style="{StaticResource IdentifierTextStyle}" Text="DateTime" />
+                <TextBlock Style="{StaticResource IdentifierTextStyle}" Text="AddDays" />
+                <TextBlock Style="{StaticResource IdentifierTextStyle}" Text="(" />
+                <TextBlock Foreground="Green" Margin="0" Style="{StaticResource IdentifierTextStyle}" Text="Double" />
+                <TextBlock Style="{StaticResource IdentifierTextStyle}" Text="value" />
+                <TextBlock Margin="0" Style="{StaticResource IdentifierTextStyle}" Text=")" />
+            </StackPanel>
+
+        </Grid>
+        <Grid Margin="0,10,0,0" Grid.Row="1">
+            <TextBlock Style="{StaticResource DescriptionTextStyle}">dfdsnvndsjvdksjfvnksjdnldjksnlkjdkdsjvnldskjvnlsdkjvnlskjnlksdjvnkljdfklkljkljvsdkjkjsvdkjvsdlk</TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -9,7 +9,7 @@ namespace Matrix
         {
             set
             {
-                webBrowser1.Url = new Uri(value);
+                //webBrowser1.Url = new Uri(value);
             }
         }
 

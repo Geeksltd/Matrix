@@ -24,7 +24,7 @@ namespace Matrix
             {
                 var dlgBrowser = new DlgBrowser
                 {
-                    HtmlFilePath = sampleFilePath,
+                    //HtmlFilePath = sampleFilePath,
                     Text = FormCaption
                 };
                 dlgBrowser.Show();
