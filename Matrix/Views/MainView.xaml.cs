@@ -27,7 +27,6 @@ namespace Matrix.Views
             var vm = new MainViewModel();
             this.DataContext = vm;
             this.tStack2.ItemsSource = vm.MyMethod.Parameters;
-            vm.Results.Add(new TestResult { Object = "Fuck", Result = "A child", Value = "Sperm" });
             this.ResultslistView.ItemsSource = vm.Results;
         }
     }

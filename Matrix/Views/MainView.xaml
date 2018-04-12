@@ -85,8 +85,8 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="150" Header="Object" DisplayMemberBinding="{Binding Object}"/>
-                        <GridViewColumn Width="150" Header="Value" DisplayMemberBinding="{Binding Result}"/>
-                        <GridViewColumn Width="150" Header="Result" DisplayMemberBinding="{Binding Value}"/>
+                        <GridViewColumn Width="150" Header="Value" DisplayMemberBinding="{Binding Value }"/>
+                        <GridViewColumn Width="150" Header="Result" DisplayMemberBinding="{Binding Result}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -15,7 +15,7 @@ namespace Matrix.Models
         {
             var presenter = new MethodPresenter();
             MyMethod = presenter.PresentMethod();
-            Results = new ObservableCollection<TestResult>();
+            Results = new ObservableCollection<TestResult>(new TestResultPresenter().GenerateSamples(5, MyMethod));
         }
         public Method MyMethod { get; set; }
         public ObservableCollection<TestResult> Results { get; set; }

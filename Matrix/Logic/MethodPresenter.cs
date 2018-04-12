@@ -98,7 +98,9 @@ namespace Matrix.Logic
                 XMLDescription = symbol.GetDocumentationCommentXml(),
                 MethodName = mI.Name,
                 Parameters = parameters,
-                ReturnType = mI.ReturnType.Name
+                ReturnType = mI.ReturnType.Name,
+                MethodInformation = mI,
+                ClassInstance = classInstance
 
             };
         }
