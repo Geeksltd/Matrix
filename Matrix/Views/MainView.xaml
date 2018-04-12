@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Matrix.Views"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="450" d:DesignWidth="450">
+             d:DesignHeight="700" d:DesignWidth="550">
     <UserControl.Resources>
         <Style x:Key="TileTextStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Gray" />
@@ -79,6 +79,17 @@
         <Grid Margin="0,10,0,0" Grid.Row="1">
             <TextBlock Text="{Binding MyMethod.XMLDescription}" Style="{StaticResource DescriptionTextStyle}" />
             
+        </Grid>
+        <Grid Grid.Row="2">
+            <ListView x:Name="ResultslistView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Object" DisplayMemberBinding="{Binding Object}"/>
+                        <GridViewColumn Width="150" Header="Value" DisplayMemberBinding="{Binding Result}"/>
+                        <GridViewColumn Width="150" Header="Result" DisplayMemberBinding="{Binding Value}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </UserControl>

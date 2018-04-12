@@ -15,7 +15,7 @@ using Matrix.Infrustructure;
 
 namespace Matrix.Logic
 {
-    class ValuePresenter
+    class MethodPresenter
     {
         Method model;
         MethodInfo mI;
@@ -23,8 +23,8 @@ namespace Matrix.Logic
         object classInstance;
         bool flagOk = true;
         public bool FlagOk => flagOk;
-        public ValuePresenter() => Init(Current.Symbol);
-        public ValuePresenter(ISymbol symbol) => Init(symbol);
+        public MethodPresenter() => Init(Current.Symbol);
+        public MethodPresenter(ISymbol symbol) => Init(symbol);
         void Init(ISymbol symbol)
         {
             var asmName = symbol.ContainingAssembly.Name;

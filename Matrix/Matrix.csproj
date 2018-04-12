@@ -50,10 +50,12 @@
     <Compile Include="Infrustructure\Constant.cs" />
     <Compile Include="Infrustructure\Current.cs" />
     <Compile Include="Logic\CodeAnalysis.cs" />
-    <Compile Include="Logic\ValuePresenter.cs" />
+    <Compile Include="Logic\MethodPresenter.cs" />
+    <Compile Include="Logic\TestResultPresenter.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Compile Include="Models\Method.cs" />
     <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\TestResult.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Views\DlgBrowser.cs">
       <SubType>Form</SubType>
