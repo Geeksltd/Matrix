@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Matrix.Models
 {
-    class Method
+    public class Method
     {
         public string Namespace { get; set; }
+        public string DeclaringType { get; set; }
         public string MethodName { get; set; }
         public string ReturnType { get; set; }
         public IEnumerable<Parameter> Parameters { get; set; }

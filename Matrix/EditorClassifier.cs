@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
 using Matrix.Logic;
+using Matrix.Infrustructure;
 
 namespace Matrix
 {
@@ -21,7 +22,7 @@ namespace Matrix
             m_provider = provider;
             m_subjectBuffer = subjectBuffer;
         }
-        
+
         public void AugmentQuickInfoSession(IQuickInfoSession session, IList<object> qiContent, out ITrackingSpan applicableToSpan)
         {
             try
@@ -39,6 +40,7 @@ namespace Matrix
                 var symbol = CodeAnalysis.GetCurrentSymbol(extent.Span);
                 if (symbol != null)
                 {
+                    Current.Symbol = symbol;
                     var sp = new SamplePresenter(symbol);
                     if (sp.FlagOk)
                     {
@@ -52,7 +54,7 @@ namespace Matrix
             }
             catch (Exception err)
             {
-                Debug.WriteLine(err .ToString() + new StackTrace(err).ToString());
+                Debug.WriteLine(err.ToString() + new StackTrace(err).ToString());
             }
             finally
             {

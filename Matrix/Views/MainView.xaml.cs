@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Matrix.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace Matrix.Views
         public MainView()
         {
             InitializeComponent();
+            var vm= new MainViewModel();
+            this.DataContext = vm;
+            this.tStack2.ItemsSource = vm.MyMethod.Parameters;
         }
     }
 }

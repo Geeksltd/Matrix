@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matrix.Models
 {
-    class Parameter
+    public class Parameter
     {
         public string Type { get; set; }
         public string Name { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Matrix.Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Matrix.Models
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
+        public MainViewModel()
+        {
+            var presenter = new ValuePresenter();
+            MyMethod = presenter.PresentMethod();
+        }
+        public Method MyMethod { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

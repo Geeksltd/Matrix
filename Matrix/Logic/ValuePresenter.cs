@@ -9,17 +9,23 @@ using Matrix.Utils;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using VSLangProj;
+using Microsoft.CodeAnalysis;
+using Matrix.Models;
+using Matrix.Infrustructure;
 
 namespace Matrix.Logic
 {
     class ValuePresenter
     {
-        MethodInfo MI;
-        Type ClassType;
+        Method model;
+        MethodInfo mI;
+        Type classType;
         object classInstance;
         bool flagOk = true;
         public bool FlagOk => flagOk;
-        public ValuePresenter(Microsoft.CodeAnalysis.ISymbol symbol)
+        public ValuePresenter() => Init(Current.Symbol);
+        public ValuePresenter(ISymbol symbol) => Init(symbol);
+        void Init(ISymbol symbol)
         {
             var asmName = symbol.ContainingAssembly.Name;
             if (asmName == "MyAshes")
@@ -42,21 +48,21 @@ namespace Matrix.Logic
 
 
             var objAssembly = Assembly.LoadFrom(asmFilePath);
-            ClassType = objAssembly.GetType(className);
-            classInstance = ValueSampler.SampleValue(ClassType);
-            if (ClassType == null)
+            classType = objAssembly.GetType(className);
+            classInstance = ValueSampler.SampleValue(classType);
+            if (classType == null)
             {
                 flagOk = false;
                 return;
             }
 
-            if (!(ClassType.GetConstructor(Type.EmptyTypes) == null && ClassType.IsAbstract && ClassType.IsSealed))
+            if (!(classType.GetConstructor(Type.EmptyTypes) == null && classType.IsAbstract && classType.IsSealed))
             {
                 if (classInstance == null)
                 {
-                    if (ClassType.GetConstructor(Type.EmptyTypes) != null)
+                    if (classType.GetConstructor(Type.EmptyTypes) != null)
                     {
-                        classInstance = Activator.CreateInstance(ClassType);
+                        classInstance = Activator.CreateInstance(classType);
                     }
                     else
                     {
@@ -66,14 +72,39 @@ namespace Matrix.Logic
                 }
             }
 
-            MI = ClassType.GetMethod(functionName, paramTypes.ToArray());
-            if (MI == null)
+            mI = classType.GetMethod(functionName, paramTypes.ToArray());
+            if (mI == null)
             {
                 flagOk = false;
                 return;
             }
 
-            
+            var parInfos = mI.GetParameters();
+            var parameters = new List<Parameter>();
+            var cnt = 1;
+            foreach (var pInfo in parInfos)
+            {
+                parameters.Add(new Parameter() { Name = pInfo.Name, Type = pInfo.ParameterType.Name });
+                cnt++;
+            }
+
+            //if (parInfos.Count() == 0) GenerateSamples(1);
+            //else GenerateSamples(3);
+
+            model = new Method()
+            {
+                Namespace = classType.Namespace,
+                DeclaringType = mI.DeclaringType.Name,
+                XMLDescription = symbol.GetDocumentationCommentXml(),
+                MethodName = mI.Name,
+                Parameters = parameters,
+                ReturnType = mI.ReturnType.Name
+
+            };
         }
+
+        public Method PresentMethod() => model;
+
+
     }
 }
