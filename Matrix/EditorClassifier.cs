@@ -41,15 +41,11 @@ namespace Matrix
                 if (symbol != null)
                 {
                     Current.Symbol = symbol;
-                    var sp = new SamplePresenter(symbol);
-                    if (sp.FlagOk)
+                    var lnkBtn = new LinkButton
                     {
-                        var lnkBtn = new LinkButton
-                        {
-                            FormCaption = symbol.OriginalDefinition.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat)
-                        };
-                        qiContent.Insert(0, lnkBtn);
-                    }
+                        FormCaption = symbol.OriginalDefinition.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat)
+                    };
+                    qiContent.Insert(0, lnkBtn);
                 }
             }
             catch (Exception err)

@@ -13,22 +13,14 @@ namespace Matrix
         {
             InitializeComponent();
         }
-
-        public SamplePresenter sp;
         public string FormCaption = "";
         void sampleCmd_Click(object sender, RoutedEventArgs e)
         {
-            var sampleFilePath = System.IO.Path.GetTempPath() + "present.html";
-
-            if (File.Exists(sampleFilePath))
+            var dlgBrowser = new DlgBrowser
             {
-                var dlgBrowser = new DlgBrowser
-                {
-                    //HtmlFilePath = sampleFilePath,
-                    Text = FormCaption
-                };
-                dlgBrowser.Show();
-            }
+                Text = FormCaption
+            };
+            dlgBrowser.Show();
         }
     }
 }
