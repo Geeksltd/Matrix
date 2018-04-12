@@ -4,6 +4,10 @@
         <Identity Id="Matrix.72d8f3db-3502-423e-87ae-c74e18a7c900" Version="1.2" Language="en-US" Publisher="Geeks Ltd" />
         <DisplayName>Api-Matrix</DisplayName>
         <Description xml:space="preserve">A VS utility to help learn Apis more efficiently.</Description>
+        <MoreInfo>https://github.com/Geeksltd/Matrix</MoreInfo>
+        <Icon>Assets\matrixicon.ico</Icon>
+        <PreviewImage>Assets\MatrixIcon.png</PreviewImage>
+        <Tags>API,dotnet,geeks,productivity,learn,matrix</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />
