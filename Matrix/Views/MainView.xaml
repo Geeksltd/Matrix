@@ -27,10 +27,37 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
+        <Style x:Key="CustomizationTitleTest" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="WrapItems" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Margin" Value="0,5,20,5" />
+        </Style>
+        <Style x:Key="TextBoxSmall" TargetType="TextBox">
+            <Setter Property="Width" Value="50" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="30,0,0,0" />
+            <Setter Property="MaxHeight" Value="25" />
+        </Style>
+        <Style x:Key="TextBoxBig" TargetType="TextBox">
+            <Setter Property="Width" Value="170" />
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="30,0,0,0" />
+        </Style>
+        <Style x:Key="ComboStyle" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="MaxHeight" Value="27" />
+            <Setter Property="Margin" Value="30,0,0,0" />
+        </Style>
+        
     </UserControl.Resources>
     <Grid Margin="27">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -81,6 +108,47 @@
             
         </Grid>
         <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Expander Margin="0,15" Header="Test It" FontSize="25" IsExpanded="True">
+                <WrapPanel Margin="0,15">
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Generated objects count" />
+                        <TextBox Style="{StaticResource TextBoxSmall}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
+                        <ComboBox Style="{StaticResource ComboStyle}">
+                            <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
+                            <ComboBoxItem IsSelected="True">(long ticks)</ComboBoxItem>
+                            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor Args" />
+                        <TextBox Style="{StaticResource TextBoxBig}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Set" />
+                        <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Param: value" />
+                        <ComboBox Style="{StaticResource ComboStyle}">
+                            <ComboBoxItem IsSelected="True">-All-</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Custom value" />
+                        <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
+                    </StackPanel>
+
+                </WrapPanel>
+            </Expander>
+        </Grid>
+        <Grid Grid.Row="3">
             <ListView x:Name="ResultslistView">
                 <ListView.View>
                     <GridView>
