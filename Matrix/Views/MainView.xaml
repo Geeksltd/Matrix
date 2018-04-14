@@ -9,6 +9,7 @@
              d:DesignHeight="700" d:DesignWidth="550">
     <UserControl.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -79,9 +80,12 @@
                         <TextBox Style="{StaticResource TextBoxSmall}" Text="{Binding GenerationCount,Mode=TwoWay}" />
                     </StackPanel>
                     <StackPanel Style="{StaticResource WrapItems}">
+                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="On Object" />
+                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}" SelectedItem="{Binding SelectedObject,Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
-                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding Objects}">
-                        </ComboBox>
+                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}"/>
                     </StackPanel>
                     <StackPanel Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor Args" />
@@ -97,7 +101,7 @@
                             <ComboBoxItem IsSelected="True">-All-</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}">
+                    <StackPanel Style="{StaticResource WrapItems}" Visibility="{Binding IsParamsVisible, Converter={StaticResource BoolToVis}}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Custom value" />
                         <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
