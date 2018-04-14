@@ -1,7 +1,9 @@
 ﻿using Matrix.Models;
+using Matrix.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,38 +16,30 @@ namespace Matrix.Logic
             var parInfos = method.MethodInformation.GetParameters();
             for (var i = 0; i < num; i++)
             {
-                var parameterValues = new List<object>();
-                var cnt = 1;
-                var strInvokedFunc = method.MethodInformation.Name + "(";
-                foreach (var pInfo in parInfos)
-                {
-                    object param = null;
-                    param = ValueSampler.SampleValue(pInfo.ParameterType);
-                    if (param == null)
-                    {
-                        throw new NullReferenceException();
-                    }
-                    else
-                    {
-                        parameterValues.Add(param);
-                        strInvokedFunc += param.ToString();
-                        if (parInfos.Count() != cnt)
-                        {
-                            strInvokedFunc += ",";
-                        }
-                    }
-
-                    cnt += 1;
-                }
-
-                strInvokedFunc += ")";
+                var parameterValues = GetParameterValues(parInfos).ToList();
                 var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameterValues.ToArray());
                 yield return new TestResult()
                 {
-                    Object = (method.ClassInstance == null ? "" : method.ClassInstance.ToString()),
-                    Result = invokeResult.ToString(),
-                    Value = strInvokedFunc
+                    Object = (method.ClassInstance == null ? "" : method.ClassInstance),
+                    Result = invokeResult,
+                    ParameterValue = method.ToInformation(parameterValues)
                 };
+            }
+        }
+        private IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
+        {
+            foreach (var pInfo in parInfos)
+            {
+                object param = ValueSampler.SampleValue(pInfo.ParameterType);
+                if (param == null)
+                {
+                    throw new NullReferenceException("No matrix params");
+                }
+                else
+                {
+                    yield return param;
+                }
+
             }
         }
     }

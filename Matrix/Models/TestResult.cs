@@ -8,8 +8,8 @@ namespace Matrix.Models
 {
     public class TestResult
     {
-        public string Object { get; set; }
-        public string Value { get; set; }
-        public string Result { get; set; }
+        public object Object { get; set; }
+        public string ParameterValue { get; set; }
+        public object Result { get; set; }
     }
 }

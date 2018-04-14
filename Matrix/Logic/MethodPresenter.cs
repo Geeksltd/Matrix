@@ -21,8 +21,6 @@ namespace Matrix.Logic
         MethodInfo mI;
         Type classType;
         object classInstance;
-        bool flagOk = true;
-        public bool FlagOk => flagOk;
         public MethodPresenter() => Init(Current.Symbol);
         public MethodPresenter(ISymbol symbol) => Init(symbol);
         void Init(ISymbol symbol)
@@ -30,7 +28,6 @@ namespace Matrix.Logic
             var asmName = symbol.ContainingAssembly.Name;
             if (asmName == "MyAshes")
             {
-                flagOk = false;
                 return;
             }
 
@@ -52,7 +49,6 @@ namespace Matrix.Logic
             classInstance = ValueSampler.SampleValue(classType);
             if (classType == null)
             {
-                flagOk = false;
                 return;
             }
 
@@ -66,7 +62,6 @@ namespace Matrix.Logic
                     }
                     else
                     {
-                        flagOk = false;
                         return;
                     }
                 }
@@ -75,7 +70,6 @@ namespace Matrix.Logic
             mI = classType.GetMethod(functionName, paramTypes.ToArray());
             if (mI == null)
             {
-                flagOk = false;
                 return;
             }
 
@@ -87,9 +81,6 @@ namespace Matrix.Logic
                 parameters.Add(new Parameter() { Name = pInfo.Name, Type = pInfo.ParameterType.Name });
                 cnt++;
             }
-
-            //if (parInfos.Count() == 0) GenerateSamples(1);
-            //else GenerateSamples(3);
 
             model = new Method()
             {

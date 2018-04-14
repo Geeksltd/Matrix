@@ -26,8 +26,6 @@ namespace Matrix.Views
             InitializeComponent();
             var vm = new MainViewModel();
             this.DataContext = vm;
-            this.tStack2.ItemsSource = vm.MyMethod.Parameters;
-            this.ResultslistView.ItemsSource = vm.Results;
         }
     }
 

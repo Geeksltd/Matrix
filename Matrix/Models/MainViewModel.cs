@@ -34,6 +34,7 @@ namespace Matrix.Models
             set => PropertyChanged.ChangeAndNotify(ref _generationCount, value, () => GenerationCount);
         }
         public Command SampleGeneration { get; set; }
+        public IEnumerable<object> Objects { get => this.Results.Select(x => x.Object); }
         public Method MyMethod { get; set; }
         public ObservableCollection<TestResult> Results
         {
@@ -41,6 +42,10 @@ namespace Matrix.Models
             set { PropertyChanged.ChangeAndNotify(ref _results, value, () => Results); System.Diagnostics.Debug.WriteLine(Results.Count); }
         }
         #endregion
+
+        #region methods
         private void GenerateSample(object parameter) => Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
+
+        #endregion
     }
 }

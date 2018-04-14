@@ -1,4 +1,6 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Matrix.Logic;
+using Matrix.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
@@ -138,6 +140,24 @@ namespace Matrix.Utils
 
             field = value;
             return true;
+        }
+
+        public static string ToInformation(this Method method, List<object> parameters)
+        {
+            var cnt = 1;
+            StringBuilder strBuilder = new StringBuilder();
+            strBuilder.Append(method.MethodInformation.Name).Append("(");
+            foreach (var param in parameters)
+            {
+                strBuilder.Append(param.ToString());
+                if (method.MethodInformation.GetParameters().Count() != cnt)
+                {
+                    strBuilder.Append(",");
+                }
+                cnt++;
+            }
+            strBuilder.Append(")");
+            return strBuilder.ToString();
         }
     }
 }
