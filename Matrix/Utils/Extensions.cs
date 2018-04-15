@@ -148,7 +148,7 @@ namespace Matrix.Utils
             field = value;
             return true;
         }
-
+        public static string ToInformation(this Method method, IEnumerable<Parameter> parameters) => ToInformation(method, parameters.Select(x => x.Value).ToList());
         public static string ToInformation(this Method method, List<object> parameters)
         {
             var cnt = 1;
@@ -173,9 +173,17 @@ namespace Matrix.Utils
                 yield return new Parameter()
                 {
                     Name=param.Name,
-                    Type=param.ParameterType.Name
+                    Type=param.ParameterType
                 };
             }
         }
+        //public object[] ToArrayParams(this IEnumerable<Parameter> parameters)
+        //{
+        //    foreach (var parameter in parameters)
+        //    {
+        //        var parameterType = parameter.Type;
+        //        yield return Convert.ChangeType(parameter,parameterType);
+        //    }
+        //}
     }
 }

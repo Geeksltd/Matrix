@@ -74,11 +74,12 @@ namespace Matrix.Logic
             }
 
             var parInfos = mI.GetParameters();
+
             var parameters = new List<Parameter>();
             var cnt = 1;
             foreach (var pInfo in parInfos)
             {
-                parameters.Add(new Parameter() { Name = pInfo.Name, Type = pInfo.ParameterType.Name });
+                parameters.Add(new Parameter() { Name = pInfo.Name,Type=pInfo.ParameterType });
                 cnt++;
             }
 

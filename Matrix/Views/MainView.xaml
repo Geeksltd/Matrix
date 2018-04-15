@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Matrix.Views"
+             xmlns:converters="clr-namespace:Matrix.Views.Converters"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="700" d:DesignWidth="550">
@@ -54,7 +55,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="0" Foreground="Green" Style="{StaticResource IdentifierTextStyle}" Text="{Binding Type}" />
+                                <TextBlock Margin="0" Foreground="Green" Style="{StaticResource IdentifierTextStyle}" Text="{Binding Type.Name}" />
                                 <TextBlock Style="{StaticResource IdentifierTextStyle}" Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
@@ -85,13 +86,25 @@
                     </StackPanel>
                     <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
-                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}"/>
+                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding Ctors}" SelectedItem="{Binding SelectedCtor,Mode=TwoWay}"/>
                     </StackPanel>
-                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
-                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor Args" />
-                        <TextBox Style="{StaticResource TextBoxBig}" />
-                    </StackPanel>
-                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
+                    <ItemsControl ItemsSource="{Binding SelectedCtorParameters}" x:Name="ctorValue"  Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Style="{StaticResource WrapItems}" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor parameter:" />
+                                    <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="{Binding Name}" />
+                                    <TextBox Style="{StaticResource TextBoxSmall}" Text="{Binding Value,Mode=TwoWay}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" IsEnabled="False" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Set" />
                         <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
                     </StackPanel>

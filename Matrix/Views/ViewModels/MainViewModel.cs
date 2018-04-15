@@ -17,6 +17,9 @@ namespace Matrix.Views.ViewModels
             SampleGeneration = Command.RegisterCommand(GenerateSample);
             MyMethod = new MethodPresenter().PresentMethod();
             Params = new ObservableCollection<Parameter>(MyMethod.MethodInformation.GetParameters().ToParamaters());
+            Ctors = new ObservableCollection<Constructor>(Constructor.GetCTors(MyMethod.ClassInstance.GetType()));
+            SelectedCtorParameters = new ObservableCollection<Parameter>();
+            SelectedCtor = Ctors.FirstOrDefault();
             GenerateSample(null);
         }
         #endregion
@@ -31,6 +34,7 @@ namespace Matrix.Views.ViewModels
         int _generationCount = 5;
         ObservableCollection<TestResult> _results = new ObservableCollection<TestResult>();
         object _selectedObject;
+        Constructor _selectedCtor;
         bool _isParamsVisible;
         bool _isCtorAvailable;
         bool _isGeneratedItemCountVisible;
@@ -81,19 +85,24 @@ namespace Matrix.Views.ViewModels
                 OnPropertyChange("IsParamsVisible");
             }
         }
-        private void OnPropertyChange(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
         public ObservableCollection<TestResult> Results
         {
             get => _results;
             set => PropertyChanged.ChangeAndNotify(ref _results, value, () => Results);
         }
         public ObservableCollection<Parameter> Params { get; set; }
+        public ObservableCollection<Constructor> Ctors { get; set; }
+        public Constructor SelectedCtor
+        {
+            get => _selectedCtor;
+            set
+            {
+                _selectedCtor = value;
+                SelectedCtorParameters.ConvertReplace(new ObservableCollection<Parameter>(SelectedCtor.Params));
+                OnPropertyChange("SelectedCtor");
+            }
+        }
+        public ObservableCollection<Parameter> SelectedCtorParameters { get; set; }
         #endregion
 
         #region methods
@@ -121,12 +130,14 @@ namespace Matrix.Views.ViewModels
         }
         private void GenerateSample(object parameter)
         {
-            if (IsParamsVisible)
-                Results.ConvertReplace(new TestResultPresenter().GenerateSample(MyMethod, Params.Select(x => (object)double.Parse(x.Value.ToString()))));
+            if (IsParamsVisible && IsCtorVisible)
+                Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params, SelectedCtor, SelectedCtorParameters));
+            else if (IsParamsVisible)
+                Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params));
             else
-                Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
+                Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         }
-        private void GenerateSample() => Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
+        private void GenerateSample() => Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         private IEnumerable<object> GetResultObjectOptions()
         {
             var objs = new List<object>(Results.Select(x => x.Result));
@@ -134,6 +145,13 @@ namespace Matrix.Views.ViewModels
             objs.Add(ALL);
             objs.Add(CUSTOM);
             return objs;
+        }
+        private void OnPropertyChange(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
         #endregion
     }

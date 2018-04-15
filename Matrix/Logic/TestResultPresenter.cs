@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Matrix.Logic
 {
-    class TestResultPresenter
+    static class TestResultPresenter
     {
-        public IEnumerable<TestResult> GenerateSamples(int num, Method method)
+        public static IEnumerable<TestResult> GenerateSamples(int num, Method method)
         {
             var parInfos = method.MethodInformation.GetParameters();
             for (var i = 0; i < num; i++)
@@ -26,7 +26,24 @@ namespace Matrix.Logic
                 };
             }
         }
-        public TestResult GenerateSample( Method method,IEnumerable<object> parameters)
+        public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters, Constructor ctor = null, IEnumerable<Parameter> selectedCtorParameters = null)
+        {
+            var parInfos = method.MethodInformation.GetParameters();
+            object instance = null;
+            if (ctor == null)
+                instance = Activator.CreateInstance(method.ClassInstance.GetType());
+            else
+                instance = Activator.CreateInstance(method.ClassInstance.GetType(), selectedCtorParameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
+
+            var invokeResult = method.MethodInformation.Invoke(instance, parameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
+            return new TestResult()
+            {
+                Object = instance,
+                Result = invokeResult,
+                ParameterValue = method.ToInformation(parameters)
+            };
+        }
+        public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters)
         {
             var parInfos = method.MethodInformation.GetParameters();
             var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameters.ToArray());
@@ -34,10 +51,10 @@ namespace Matrix.Logic
             {
                 Object = (method.ClassInstance == null ? "" : method.ClassInstance),
                 Result = invokeResult,
-                ParameterValue = method.ToInformation(parameters.ToList())
+                ParameterValue = method.ToInformation(parameters)
             };
         }
-        private IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
+        private static IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
         {
             foreach (var pInfo in parInfos)
             {
@@ -50,7 +67,6 @@ namespace Matrix.Logic
                 {
                     yield return param;
                 }
-
             }
         }
     }
