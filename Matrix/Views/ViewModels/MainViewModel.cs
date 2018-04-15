@@ -11,6 +11,11 @@ namespace Matrix.Views.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        #region Consts
+        const string ALL = "-All-";
+        const string CUSTOM = "-Custom...-";
+        #endregion
+
         #region Ctor
         public MainViewModel()
         {
@@ -22,11 +27,6 @@ namespace Matrix.Views.ViewModels
             SelectedCtor = Ctors.FirstOrDefault();
             GenerateSample(null);
         }
-        #endregion
-
-        #region Consts
-        const string ALL = "-All-";
-        const string CUSTOM = "-Custom...-";
         #endregion
 
         #region Fields
@@ -98,7 +98,7 @@ namespace Matrix.Views.ViewModels
             set
             {
                 _selectedCtor = value;
-                SelectedCtorParameters.ConvertReplace(new ObservableCollection<Parameter>(SelectedCtor.Params));
+                SelectedCtorParameters.ConvertReplace(SelectedCtor.Params);
                 OnPropertyChange("SelectedCtor");
             }
         }
