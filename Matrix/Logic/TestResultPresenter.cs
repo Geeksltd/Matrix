@@ -26,6 +26,17 @@ namespace Matrix.Logic
                 };
             }
         }
+        public TestResult GenerateSample( Method method,IEnumerable<object> parameters)
+        {
+            var parInfos = method.MethodInformation.GetParameters();
+            var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameters.ToArray());
+            return new TestResult()
+            {
+                Object = (method.ClassInstance == null ? "" : method.ClassInstance),
+                Result = invokeResult,
+                ParameterValue = method.ToInformation(parameters.ToList())
+            };
+        }
         private IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
         {
             foreach (var pInfo in parInfos)

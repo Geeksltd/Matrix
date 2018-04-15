@@ -16,6 +16,7 @@ namespace Matrix.Views.ViewModels
         {
             SampleGeneration = Command.RegisterCommand(GenerateSample);
             MyMethod = new MethodPresenter().PresentMethod();
+            Params = new ObservableCollection<Parameter>(MyMethod.MethodInformation.GetParameters().ToParamaters());
             GenerateSample(null);
         }
         #endregion
@@ -48,9 +49,8 @@ namespace Matrix.Views.ViewModels
         }
 
         public Method MyMethod { get; set; }
-        //TODO : Impeliment Visibility
-        public bool ConstructorVisibility { get; set; }
-        public bool SetVisibility { get; set; }
+        public bool IsCtorVisible { get => false; }
+        public bool IsSetVisible { get => false; }
         public bool IsParamsVisible
         {
             get => _isParamsVisible;
@@ -72,6 +72,7 @@ namespace Matrix.Views.ViewModels
             get => _results;
             set => PropertyChanged.ChangeAndNotify(ref _results, value, () => Results);
         }
+        public ObservableCollection<Parameter> Params { get; set; }
         #endregion
 
         #region methods
@@ -88,7 +89,14 @@ namespace Matrix.Views.ViewModels
 
             System.Diagnostics.Debug.WriteLine(IsParamsVisible);
         }
-        private void GenerateSample(object parameter) => Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
+        private void GenerateSample(object parameter)
+        {
+            if (IsParamsVisible)
+                Results.ConvertReplace(new TestResultPresenter().GenerateSample(MyMethod, Params.Select(x => (object)double.Parse(x.Value.ToString()))));
+            else
+                Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
+        }
+        private void GenerateSample() => Results.ConvertReplace(new TestResultPresenter().GenerateSamples(GenerationCount, MyMethod));
         private IEnumerable<object> GetResultObjectOptions()
         {
             var objs = new List<object>(Results.Select(x => x.Result));

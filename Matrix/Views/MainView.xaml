@@ -83,28 +83,34 @@
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="On Object" />
                         <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}" SelectedItem="{Binding SelectedObject,Mode=TwoWay}" />
                     </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}">
+                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
                         <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}"/>
                     </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}">
+                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor Args" />
                         <TextBox Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}">
+                    <StackPanel Visibility="{Binding IsSetVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Set" />
                         <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}">
-                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Param: value" />
-                        <ComboBox Style="{StaticResource ComboStyle}">
-                            <ComboBoxItem IsSelected="True">-All-</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource WrapItems}" Visibility="{Binding IsParamsVisible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Custom value" />
-                        <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
-                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding Params}" x:Name="ParamValue"  Visibility="{Binding IsParamsVisible, Converter={StaticResource BoolToVis}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Style="{StaticResource WrapItems}" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Param:" />
+                                    <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="{Binding Name}" />
+                                    <TextBox  Style="{StaticResource TextBoxSmall}" Text="{Binding Value,Mode=TwoWay}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                     <Button Command="{Binding SampleGeneration}" Content="Go!" Height="50" Width="70" />
 
                 </WrapPanel>
