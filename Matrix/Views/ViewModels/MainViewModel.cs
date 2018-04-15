@@ -21,13 +21,19 @@ namespace Matrix.Views.ViewModels
         }
         #endregion
 
-        #region Fields
+        #region Consts
         const string ALL = "-All-";
+        const string CUSTOM = "-Custom...-";
+        #endregion
+
+        #region Fields
         public event PropertyChangedEventHandler PropertyChanged;
         int _generationCount = 5;
         ObservableCollection<TestResult> _results = new ObservableCollection<TestResult>();
         object _selectedObject;
         bool _isParamsVisible;
+        bool _isCtorAvailable;
+        bool _isGeneratedItemCountVisible;
         #endregion
 
         #region Properties
@@ -47,10 +53,25 @@ namespace Matrix.Views.ViewModels
                 UpdateVisibilities();
             }
         }
-
         public Method MyMethod { get; set; }
-        public bool IsCtorVisible { get => false; }
-        public bool IsSetVisible { get => false; }
+        public bool IsCtorVisible
+        {
+            get => _isCtorAvailable;
+            set
+            {
+                _isCtorAvailable = value;
+                OnPropertyChange("IsCtorVisible");
+            }
+        }
+        public bool IsGeneratedItemCountVisible
+        {
+            get => _isGeneratedItemCountVisible;
+            set
+            {
+                _isGeneratedItemCountVisible = value;
+                OnPropertyChange("IsGeneratedItemCountVisible");
+            }
+        }
         public bool IsParamsVisible
         {
             get => _isParamsVisible;
@@ -79,15 +100,24 @@ namespace Matrix.Views.ViewModels
 
         private void UpdateVisibilities()
         {
-            System.Diagnostics.Debug.WriteLine(SelectedObject.ToString() != ALL);
-            System.Diagnostics.Debug.WriteLine(SelectedObject.ToString());
-            System.Diagnostics.Debug.WriteLine(ALL);
             if (SelectedObject.ToString() == ALL)
+            {
                 IsParamsVisible = false;
-            else
+                IsCtorVisible = false;
+                IsGeneratedItemCountVisible = true;
+            }
+            else if (SelectedObject.ToString() == CUSTOM)
+            {
+                IsCtorVisible = true;
                 IsParamsVisible = true;
-
-            System.Diagnostics.Debug.WriteLine(IsParamsVisible);
+                IsGeneratedItemCountVisible = false;
+            }
+            else
+            {
+                IsCtorVisible = false;
+                IsParamsVisible = true;
+                IsGeneratedItemCountVisible = false;
+            }
         }
         private void GenerateSample(object parameter)
         {
@@ -102,6 +132,7 @@ namespace Matrix.Views.ViewModels
             var objs = new List<object>(Results.Select(x => x.Result));
             SelectedObject = ALL;
             objs.Add(ALL);
+            objs.Add(CUSTOM);
             return objs;
         }
         #endregion

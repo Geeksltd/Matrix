@@ -75,7 +75,7 @@
             </Grid.RowDefinitions>
             <Expander Margin="0,15" Header="Test It" FontSize="25" IsExpanded="True">
                 <WrapPanel Margin="0,15">
-                    <StackPanel Style="{StaticResource WrapItems}">
+                    <StackPanel Visibility="{Binding IsGeneratedItemCountVisible,Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Generated objects count" />
                         <TextBox Style="{StaticResource TextBoxSmall}" Text="{Binding GenerationCount,Mode=TwoWay}" />
                     </StackPanel>
@@ -91,7 +91,7 @@
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor Args" />
                         <TextBox Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
-                    <StackPanel Visibility="{Binding IsSetVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
+                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Set" />
                         <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
