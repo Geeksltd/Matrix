@@ -46,7 +46,7 @@ namespace Matrix.Logic
         public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters)
         {
             var parInfos = method.MethodInformation.GetParameters();
-            var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameters.ToArray());
+            var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
             return new TestResult()
             {
                 Object = (method.ClassInstance == null ? "" : method.ClassInstance),
