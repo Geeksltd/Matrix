@@ -14,6 +14,7 @@ namespace Matrix.Views.ViewModels
         #region Consts
         const string ALL = "-All-";
         const string CUSTOM = "-Custom...-";
+        const string EMPTYCTOR = "()";
         #endregion
 
         #region Ctor
@@ -22,7 +23,7 @@ namespace Matrix.Views.ViewModels
             SampleGeneration = Command.RegisterCommand(GenerateSample);
             MyMethod = new MethodPresenter().PresentMethod();
             Params = new ObservableCollection<Parameter>(MyMethod.MethodInformation.GetParameters().ToParamaters());
-            Ctors = new ObservableCollection<Constructor>(Constructor.GetCTors(MyMethod.ClassInstance.GetType()));
+            Ctors = new ObservableCollection<KeyValuePair<object, string>>(Constructor.GetCTors(MyMethod.ClassInstance.GetType()).GetSelectList(EMPTYCTOR));
             SelectedCtorParameters = new ObservableCollection<Parameter>();
             SelectedCtor = Ctors.FirstOrDefault();
             GenerateSample(null);
@@ -34,7 +35,7 @@ namespace Matrix.Views.ViewModels
         int _generationCount = 5;
         ObservableCollection<TestResult> _results = new ObservableCollection<TestResult>();
         KeyValuePair<object, string> _selectedObject;
-        Constructor _selectedCtor;
+        KeyValuePair<object, string> _selectedCtor;
         bool _isParamsVisible;
         bool _isCtorAvailable;
         bool _isGeneratedItemCountVisible;
@@ -92,14 +93,21 @@ namespace Matrix.Views.ViewModels
             set => PropertyChanged.ChangeAndNotify(ref _results, value, () => Results);
         }
         public ObservableCollection<Parameter> Params { get; set; }
-        public ObservableCollection<Constructor> Ctors { get; set; }
-        public Constructor SelectedCtor
+        public ObservableCollection<KeyValuePair<object, string>> Ctors { get; set; }
+        public KeyValuePair<object, string> SelectedCtor
         {
             get => _selectedCtor;
             set
             {
                 _selectedCtor = value;
-                SelectedCtorParameters.ConvertReplace(SelectedCtor.Params);
+                try
+                {
+                    SelectedCtorParameters.ConvertReplace(((Constructor)SelectedCtor.Key).Params);
+                }
+                catch
+                {
+                    SelectedCtorParameters.Clear();
+                }
                 OnPropertyChange("SelectedCtor");
             }
         }
@@ -132,7 +140,10 @@ namespace Matrix.Views.ViewModels
         private void GenerateSample(object parameter)
         {
             if (IsParamsVisible && IsCtorVisible)
-                Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params, SelectedCtor, SelectedCtorParameters));
+                if (SelectedCtor.Value == EMPTYCTOR)
+                    Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params, null, null));
+                else
+                    Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params, SelectedCtor.Key as Constructor, SelectedCtorParameters));
             else if (IsParamsVisible)
                 Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params));
             else

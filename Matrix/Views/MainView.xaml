@@ -85,7 +85,7 @@
                     </StackPanel>
                     <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
-                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding Ctors}" SelectedItem="{Binding SelectedCtor,Mode=TwoWay}"/>
+                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding Ctors}" SelectedItem="{Binding SelectedCtor,Mode=TwoWay}" DisplayMemberPath="Value" SelectedValuePath="Key"/>
                     </StackPanel>
                     <ItemsControl ItemsSource="{Binding SelectedCtorParameters}" x:Name="ctorValue"  Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}">
                         <ItemsControl.ItemsPanel>
