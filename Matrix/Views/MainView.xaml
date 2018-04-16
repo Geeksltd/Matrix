@@ -81,7 +81,7 @@
                     </StackPanel>
                     <StackPanel Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="On Object" />
-                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}" SelectedItem="{Binding SelectedObject,Mode=TwoWay}" />
+                        <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding ResultObjects}" SelectedItem="{Binding SelectedObject,Mode=TwoWay}" DisplayMemberPath="Value" SelectedValuePath="Key"/>
                     </StackPanel>
                     <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />

@@ -33,7 +33,7 @@ namespace Matrix.Views.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         int _generationCount = 5;
         ObservableCollection<TestResult> _results = new ObservableCollection<TestResult>();
-        object _selectedObject;
+        KeyValuePair<object, string> _selectedObject;
         Constructor _selectedCtor;
         bool _isParamsVisible;
         bool _isCtorAvailable;
@@ -47,13 +47,14 @@ namespace Matrix.Views.ViewModels
             set => PropertyChanged.ChangeAndNotify(ref _generationCount, value, () => GenerationCount);
         }
         public Command SampleGeneration { get; set; }
-        public IEnumerable<object> ResultObjects { get => GetResultObjectOptions(); }
-        public object SelectedObject
+        public IEnumerable<KeyValuePair<object, string>> ResultObjects { get => GetResultObjectOptions(); }
+        public KeyValuePair<object, string> SelectedObject
         {
             get => _selectedObject;
             set
             {
-                PropertyChanged.ChangeAndNotify(ref _selectedObject, value, () => SelectedObject);
+                _selectedObject = value;
+                OnPropertyChange("SelectedObject");
                 UpdateVisibilities();
             }
         }
@@ -109,13 +110,13 @@ namespace Matrix.Views.ViewModels
 
         private void UpdateVisibilities()
         {
-            if (SelectedObject.ToString() == ALL)
+            if (SelectedObject.Value == ALL)
             {
                 IsParamsVisible = false;
                 IsCtorVisible = false;
                 IsGeneratedItemCountVisible = true;
             }
-            else if (SelectedObject.ToString() == CUSTOM)
+            else if (SelectedObject.Value == CUSTOM)
             {
                 IsCtorVisible = true;
                 IsParamsVisible = true;
@@ -138,13 +139,11 @@ namespace Matrix.Views.ViewModels
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         }
         private void GenerateSample() => Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
-        private IEnumerable<object> GetResultObjectOptions()
+        private IEnumerable<KeyValuePair<object, string>> GetResultObjectOptions()
         {
-            var objs = new List<object>(Results.Select(x => x.Result));
-            SelectedObject = ALL;
-            objs.Add(ALL);
-            objs.Add(CUSTOM);
-            return objs;
+            var results = Results.Select(x => x.Result).GetSelectList(ALL, CUSTOM);
+            SelectedObject = results.Where(x => x.Value == ALL).FirstOrDefault();
+            return results;
         }
         private void OnPropertyChange(string propertyName)
         {

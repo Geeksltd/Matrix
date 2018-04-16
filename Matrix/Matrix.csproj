@@ -53,6 +53,7 @@
     <Compile Include="Logic\MethodPresenter.cs" />
     <Compile Include="Logic\TestResultPresenter.cs" />
     <Compile Include="Models\Constructor.cs" />
+    <Compile Include="Utils\SelectListHelper.cs" />
     <Compile Include="Views\ViewModels\MainViewModel.cs" />
     <Compile Include="Models\Method.cs" />
     <Compile Include="Models\Parameter.cs" />
