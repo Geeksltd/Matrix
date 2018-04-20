@@ -47,10 +47,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Infrustructure\Constant.cs" />
     <Compile Include="Infrustructure\Current.cs" />
     <Compile Include="Logic\CodeAnalysis.cs" />
     <Compile Include="Logic\MethodPresenter.cs" />
+    <Compile Include="Logic\PropertiesPresenter.cs" />
     <Compile Include="Logic\TestResultPresenter.cs" />
     <Compile Include="Models\Constructor.cs" />
     <Compile Include="Utils\SelectListHelper.cs" />

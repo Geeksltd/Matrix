@@ -26,6 +26,8 @@ namespace Matrix.Views.ViewModels
             Ctors = new ObservableCollection<KeyValuePair<object, string>>(Constructor.GetCTors(MyMethod.ClassInstance.GetType()).GetSelectList(EMPTYCTOR));
             SelectedCtorParameters = new ObservableCollection<Parameter>();
             SelectedCtor = Ctors.FirstOrDefault();
+            SetProperties = MyMethod.ClassInstance.GetType().GetProps().ToCaption();
+            System.Diagnostics.Debug.WriteLine(SetProperties);
             GenerateSample(null);
         }
         #endregion
@@ -39,6 +41,7 @@ namespace Matrix.Views.ViewModels
         bool _isParamsVisible;
         bool _isCtorAvailable;
         bool _isGeneratedItemCountVisible;
+        string _setProperties;
         #endregion
 
         #region Properties
@@ -47,8 +50,22 @@ namespace Matrix.Views.ViewModels
             get => _generationCount;
             set => PropertyChanged.ChangeAndNotify(ref _generationCount, value, () => GenerationCount);
         }
+        public bool IsSetEnabled
+        {
+            get => !(SetProperties == string.Empty);
+        }
         public Command SampleGeneration { get; set; }
         public IEnumerable<KeyValuePair<object, string>> ResultObjects { get => GetResultObjectOptions(); }
+        public string SetProperties
+        {
+            get => _setProperties;
+            set
+            {
+                var a = new DateTime();
+                _setProperties = value;
+                OnPropertyChange("SetProperties");
+            }
+        }
         public KeyValuePair<object, string> SelectedObject
         {
             get => _selectedObject;

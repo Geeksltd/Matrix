@@ -87,7 +87,7 @@
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Constructor" />
                         <ComboBox Style="{StaticResource ComboStyle}" ItemsSource="{Binding Ctors}" SelectedItem="{Binding SelectedCtor,Mode=TwoWay}" DisplayMemberPath="Value" SelectedValuePath="Key"/>
                     </StackPanel>
-                    <ItemsControl ItemsSource="{Binding SelectedCtorParameters}" x:Name="ctorValue"  Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}">
+                    <ItemsControl Background="AliceBlue" ItemsSource="{Binding SelectedCtorParameters}" x:Name="ctorValue"  Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
@@ -103,11 +103,11 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <StackPanel Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" IsEnabled="False" Style="{StaticResource WrapItems}">
+                    <StackPanel IsEnabled="{Binding IsSetEnabled}" Visibility="{Binding IsCtorVisible, Converter={StaticResource BoolToVis}}" Style="{StaticResource WrapItems}">
                         <TextBlock Style="{StaticResource CustomizationTitleTest}" Text="Set" />
-                        <TextBox ToolTip="dssdn" Style="{StaticResource TextBoxBig}" />
+                        <TextBox ToolTip="dssdn" Text="{Binding SetProperties,Mode=TwoWay}" Style="{StaticResource TextBoxBig}" />
                     </StackPanel>
-                    <ItemsControl ItemsSource="{Binding Params}" x:Name="ParamValue"  Visibility="{Binding IsParamsVisible, Converter={StaticResource BoolToVis}}">
+                    <ItemsControl Background="LightGray" ItemsSource="{Binding Params}" x:Name="ParamValue"  Visibility="{Binding IsParamsVisible, Converter={StaticResource BoolToVis}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>

@@ -172,18 +172,10 @@ namespace Matrix.Utils
             {
                 yield return new Parameter()
                 {
-                    Name=param.Name,
-                    Type=param.ParameterType
+                    Name = param.Name,
+                    Type = param.ParameterType
                 };
             }
         }
-        //public object[] ToArrayParams(this IEnumerable<Parameter> parameters)
-        //{
-        //    foreach (var parameter in parameters)
-        //    {
-        //        var parameterType = parameter.Type;
-        //        yield return Convert.ChangeType(parameter,parameterType);
-        //    }
-        //}
     }
 }
