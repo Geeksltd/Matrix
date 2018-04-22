@@ -17,41 +17,44 @@ namespace Matrix.Logic
 {
     class MethodPresenter
     {
+        Method method;
         MethodInfo methodInformation;
         Type classType;
         object classInstance;
 
-
         public MethodPresenter() => Init(Current.Symbol);
         public MethodPresenter(ISymbol symbol) => Init(symbol);
 
+        public Method PresentMethod() => method;
 
         void Init(ISymbol symbol)
         {
-            var asmblyName = symbol.ContainingAssembly.Name;
-            if (asmblyName == "MyAshes")
+            var asemblyName = symbol.ContainingAssembly.Name;
+            if (asemblyName == "MyAshes")
                 return;
 
             var appDTE = (DTE2)Package.GetGlobalService(typeof(SDTE));
             var curProj = appDTE.ActiveDocument.ProjectItem.ContainingProject;
             var vsCurProj = (VSProject)curProj.Object;
-            var asmFilePath = vsCurProj.References.OfType<Reference>().FirstOrDefault(r => r.Name == asmblyName).Path;
+            var asmFilePath = vsCurProj.References.OfType<Reference>().FirstOrDefault(r => r.Name == asemblyName).Path;
+
+            var className = symbol.ContainingType.ToDisplayString(Microsoft.CodeAnalysis.SymbolDisplayFormat.FullyQualifiedFormat).Replace("global::", "");
+            var functionName = symbol.Name;
 
             var paramTypes = new List<Type>();
             foreach (var parm in ((IMethodSymbol)symbol).Parameters)
                 paramTypes.Add(parm.Type.Name.ToString().ToType());
 
-            var className = symbol.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).Replace("global::", "");
-            var functionName = symbol.Name;
+            var objAssembly = Assembly.LoadFrom(asmFilePath);
+            classType = objAssembly.GetType(className);
+            classInstance = SampleGenerator.GenerateSample(classType);
+
             if (!IsValid(functionName, paramTypes))
                 return;
 
-            var objAssembly = Assembly.LoadFrom(asmFilePath);
-            classType = objAssembly.GetType(className);
-            classInstance = ValueSampler.SampleValue(classType);
+            MakeMethod(symbol);
         }
-
-        public Method PresentMethod(ISymbol symbol)
+        void MakeMethod(ISymbol symbol)
         {
             var parInfos = methodInformation.GetParameters();
             var parameters = new List<Parameter>();
@@ -62,7 +65,7 @@ namespace Matrix.Logic
                 cnt++;
             }
 
-            return new Method()
+            method = new Method()
             {
                 Namespace = classType.Namespace,
                 DeclaringType = methodInformation.DeclaringType.Name,
@@ -75,8 +78,7 @@ namespace Matrix.Logic
 
             };
         }
-
-        private bool IsValid(string functionName, List<Type> paramTypes)
+        bool IsValid(string functionName, List<Type> paramTypes)
         {
             if (classType == null)
                 return false;
@@ -91,8 +93,10 @@ namespace Matrix.Logic
             methodInformation = classType.GetMethod(functionName, paramTypes.ToArray());
             if (methodInformation == null)
                 return false;
+
             return true;
         }
+
 
     }
 }
