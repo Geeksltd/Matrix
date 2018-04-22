@@ -1,11 +1,19 @@
-// Note: For each method, if there is an entry in this file, rather than automatically generating examples, only the examples 
-// in this list will be used.
-{
-   "System.DateTime.AddDays(double)": {      
-      "23/01/2017" : ["1", "0", "-1"],
-      "01/01/0001" : ["-1"]      
-   },
-   "System.Int32.CompareTo(object)": { 
-      "1" : ["(string)1", "(int)1", "(int?)1", "{null}"]      
-   }
-}
+[
+    {
+        "SampleObjects":
+        [
+            {
+                "Instance":"\"2017-01-23T00:00:00\"",
+                "parameters":
+                [
+                    {
+                        "Key":"System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "Value":-1
+                    }
+                ]    
+            }      
+        ],
+        "FullClassName":"System.DateTime",
+        "MethodName":"AddDays"
+    }
+]

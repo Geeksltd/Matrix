@@ -28,12 +28,8 @@ namespace Matrix.Logic
             {
                 var symbol = semanticModel.GetSymbolInfo(synNod);
                 if (symbol.Symbol != null)
-                {
                     if (symbol.Symbol.Kind == SymbolKind.Method)
-                    {
                         return symbol.Symbol;
-                    }
-                }
             }
             return null;
         }
