@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using EnvDTE80;
-using Matrix.Logic;
 using Matrix.Utils;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -96,7 +94,5 @@ namespace Matrix.Logic
 
             return true;
         }
-
-
     }
 }

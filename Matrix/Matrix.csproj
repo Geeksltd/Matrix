@@ -53,6 +53,8 @@
     <Compile Include="Logic\PropertiesPresenter.cs" />
     <Compile Include="Logic\TestResultPresenter.cs" />
     <Compile Include="Models\Constructor.cs" />
+    <Compile Include="Models\Example.cs" />
+    <Compile Include="Models\SampleObject.cs" />
     <Compile Include="Utils\SelectListHelper.cs" />
     <Compile Include="Views\ViewModels\MainViewModel.cs" />
     <Compile Include="Models\Method.cs" />
@@ -71,7 +73,7 @@
       <DependentUpon>LinkButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Logic\ValueSampler.cs" />
+    <Compile Include="Logic\SampleGenerator.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +87,7 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Utils\CreateSample.csx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -141,6 +144,9 @@
     <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.Wpf.15.4.27004\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

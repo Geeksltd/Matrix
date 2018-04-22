@@ -58,7 +58,7 @@ namespace Matrix.Logic
         {
             foreach (var pInfo in parInfos)
             {
-                object param = ValueSampler.SampleValue(pInfo.ParameterType);
+                object param = SampleGenerator.GenerateSample(pInfo.ParameterType);
                 if (param == null)
                 {
                     throw new NullReferenceException("No matrix params");

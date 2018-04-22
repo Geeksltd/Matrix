@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Matrix.Models;
+using Microsoft.CodeAnalysis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Matrix.Infrustructure
     static class Current
     {
         public static ISymbol Symbol { get; set; }
+        public static IEnumerable<Example> DesignedExamples { get; set; }
     }
 }
