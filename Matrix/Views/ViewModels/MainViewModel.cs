@@ -1,4 +1,5 @@
-﻿using Matrix.Logic;
+﻿using Matrix.Infrustructure;
+using Matrix.Logic;
 using Matrix.Models;
 using Matrix.Utils;
 using System;
@@ -28,7 +29,7 @@ namespace Matrix.Views.ViewModels
             SelectedCtor = Ctors.FirstOrDefault();
             SetProperties = MyMethod.ClassInstance.GetType().GetProps().ToCaption();
             System.Diagnostics.Debug.WriteLine(SetProperties);
-            GenerateSample(null);
+            GenerateSample();
         }
         #endregion
 
@@ -154,7 +155,15 @@ namespace Matrix.Views.ViewModels
                 IsGeneratedItemCountVisible = false;
             }
         }
-        private void GenerateSample(object parameter)
+        void GenerateSample()
+        {
+            System.Diagnostics.Debug.WriteLine(Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType()).Any());
+            if (Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType()).Any())
+                Results.ConvertReplace(TestResultPresenter.GenerateSamples(MyMethod, Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType())));
+            else
+                Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
+        }
+        void GenerateSample(object parameter)
         {
             if (IsParamsVisible && IsCtorVisible)
                 if (SelectedCtor.Value == EMPTYCTOR)
@@ -166,7 +175,6 @@ namespace Matrix.Views.ViewModels
             else
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         }
-        private void GenerateSample() => Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         private IEnumerable<KeyValuePair<object, string>> GetResultObjectOptions()
         {
             var results = Results.Select(x => x.Result).GetSelectList(ALL, CUSTOM);
@@ -176,9 +184,7 @@ namespace Matrix.Views.ViewModels
         private void OnPropertyChange(string propertyName)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
         #endregion
     }

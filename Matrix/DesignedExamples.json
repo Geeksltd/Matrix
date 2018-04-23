@@ -2,7 +2,7 @@
   {
     "SampleObjects": [
       {
-        "Instance": "\"2017-01-23T00:00:00\"",
+        "Instance": "2017-01-23T00:00:00",
         "parameters": [
           {
             "Key": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",

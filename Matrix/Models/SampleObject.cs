@@ -8,7 +8,7 @@ namespace Matrix.Models
 {
     class SampleObject
     {
-        public string Instance { get; set; }
+        public object Instance { get; set; }
         public KeyValuePair<Type, object>[] parameters { get; set; }
     }
 }

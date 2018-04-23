@@ -27,6 +27,30 @@ namespace Matrix.Logic
                 };
             }
         }
+        public static IEnumerable<TestResult> GenerateSamples(Method method, IEnumerable<Example> examples)
+        {
+            foreach (var example in examples)
+            {
+                foreach (var item in example.SampleObjects)
+                {
+                    var thisMethod = example.Type.GetMethod(example.MethodName);
+                    System.Diagnostics.Debug.WriteLine(thisMethod.Name);
+                    System.Diagnostics.Debug.WriteLine(thisMethod.ReturnType);
+                    foreach (var sd in item.parameters.Select(x => x.Value).ToArray())
+                    {
+                        System.Diagnostics.Debug.WriteLine(sd);
+                    }
+                    var invokeResult = thisMethod.Invoke(item.Instance, item.parameters.Select(x => x.Value).ToArray());
+                    yield return new TestResult()
+                    {
+                        Object = item.Instance,
+                        Result = invokeResult,
+                        ParameterValue = method.ToInformation(item.parameters.Select(x => x.Value))
+                    };
+                }
+
+            }
+        }
         public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters, Constructor ctor = null, IEnumerable<Parameter> selectedCtorParameters = null)
         {
             var parInfos = method.MethodInformation.GetParameters();
