@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EnvDTE80;
-using Matrix.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
-using VSLangProj;
 
 
 namespace Matrix.Logic
@@ -40,5 +35,10 @@ namespace Matrix.Logic
             var doc = (EnvDTE.TextDocument)dte.ActiveDocument.Object("TextDocument");
             return doc.StartPoint.CreateEditPoint().GetText(doc.EndPoint);
         }
+
+
+        public static SyntaxTree GetSyntaxTree(this string strCode) => CSharpSyntaxTree.ParseText(strCode);
+        public static CSharpCompilation CreateCompilation(this IEnumerable<SyntaxTree> syntaxTrees) => CSharpCompilation.Create("MyAshes", syntaxTrees: syntaxTrees, references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
+        public static CSharpCompilation CreateCompilation(this SyntaxTree syntax) => CreateCompilation(new[] { syntax });
     }
 }

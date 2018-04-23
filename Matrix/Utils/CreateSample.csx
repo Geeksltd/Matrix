@@ -1,29 +1,26 @@
-﻿public static void Main()
+﻿//This is a helper script used to produce and test samples
+public static void Main()
 {
-    var Ls = new List<Example>();
-    var FirstSample = new Example();
-    FirstSample.Type = typeof(DateTime);
-    FirstSample.MethodName = "AddDays";
-    var lst = new List<SampleObject>();
-    var a = new List<KeyValuePair<Type, object>>();
-    a.Add(new KeyValuePair<Type, object>(typeof(int), -1));
-    lst.Add(new SampleObject() { Instance = new DateTime(2017, 1, 23), parameters = a.ToArray() });
-    FirstSample.SampleObjects = lst;
-    Ls.Add(FirstSample);
-    var aba = JsonConvert.SerializeObject(Ls);
+    var examples = new List<Example>();
+    var example = new Example() { Type = typeof(DateTime), MethodName = "AddDays" };
+    var samples = new List<SampleObject>();
+    var parameters = new List<KeyValuePair<Type, object>>();
+
+    parameters.Add(new KeyValuePair<Type, object>(typeof(int), -1));
+    samples.Add(new SampleObject() { Instance = new DateTime(2017, 1, 23), parameters = parameters.ToArray() });
+    example.SampleObjects = samples;
+    examples.Add(example);
+
+
+    var Json = JsonConvert.SerializeObject(examples);
+
     //read
     var b = JsonConvert.DeserializeObject<IEnumerable<Example>>(File.ReadAllText("DesignedExamples.json"));
-    foreach (var example in b)
+    foreach (var eg in b)
     {
-        foreach (var item in example.SampleObjects)
+        foreach (var item in eg.SampleObjects)
         {
-            var thisMethod = example.Type.GetMethod(example.MethodName);
-            System.Diagnostics.Debug.WriteLine(thisMethod.Name);
-            System.Diagnostics.Debug.WriteLine(thisMethod.ReturnType);
-            foreach (var sd in item.parameters.Select(x => x.Value).ToArray())
-            {
-                System.Diagnostics.Debug.WriteLine(sd);
-            }
+            var thisMethod = eg.Type.GetMethod(example.MethodName);
             var invokeResult = thisMethod.Invoke(item.Instance, item.parameters.Select(x => x.Value).ToArray());
         }
 

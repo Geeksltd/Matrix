@@ -9,10 +9,6 @@ using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
 using Matrix.Logic;
 using Matrix.Infrustructure;
-using Newtonsoft.Json;
-using Matrix.Models;
-using System.IO;
-using System.Linq;
 
 namespace Matrix
 {

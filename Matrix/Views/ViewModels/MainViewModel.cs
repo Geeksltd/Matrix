@@ -1,8 +1,8 @@
-﻿using Matrix.Infrustructure;
+﻿using System;
+using Matrix.Infrustructure;
 using Matrix.Logic;
 using Matrix.Models;
 using Matrix.Utils;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

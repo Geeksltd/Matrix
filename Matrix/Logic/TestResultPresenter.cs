@@ -34,12 +34,6 @@ namespace Matrix.Logic
                 foreach (var item in example.SampleObjects)
                 {
                     var thisMethod = example.Type.GetMethod(example.MethodName);
-                    System.Diagnostics.Debug.WriteLine(thisMethod.Name);
-                    System.Diagnostics.Debug.WriteLine(thisMethod.ReturnType);
-                    foreach (var sd in item.parameters.Select(x => x.Value).ToArray())
-                    {
-                        System.Diagnostics.Debug.WriteLine(sd);
-                    }
                     var invokeResult = thisMethod.Invoke(item.Instance, item.parameters.Select(x => x.Value).ToArray());
                     yield return new TestResult()
                     {
@@ -48,7 +42,6 @@ namespace Matrix.Logic
                         ParameterValue = method.ToInformation(item.parameters.Select(x => x.Value))
                     };
                 }
-
             }
         }
         public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters, Constructor ctor = null, IEnumerable<Parameter> selectedCtorParameters = null)
@@ -85,13 +78,9 @@ namespace Matrix.Logic
             {
                 object param = SampleGenerator.GenerateSample(pInfo.ParameterType);
                 if (param == null)
-                {
                     throw new NullReferenceException("No matrix params");
-                }
                 else
-                {
                     yield return param;
-                }
             }
         }
     }

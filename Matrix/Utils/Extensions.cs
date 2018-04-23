@@ -60,10 +60,6 @@ namespace Matrix.Utils
             return null;
         }
 
-        public static SyntaxTree GetSyntaxTree(this string strCode) => CSharpSyntaxTree.ParseText(strCode);
-        public static CSharpCompilation CreateCompilation(this IEnumerable<SyntaxTree> syntaxTrees) => CSharpCompilation.Create("MyAshes", syntaxTrees: syntaxTrees, references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
-        public static CSharpCompilation CreateCompilation(this SyntaxTree syntax) => CreateCompilation(new[] { syntax });
-
         public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> original, IEnumerable<T> newItems)
         {
             original.Clear();
