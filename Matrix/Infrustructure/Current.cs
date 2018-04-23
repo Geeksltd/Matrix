@@ -1,16 +1,14 @@
 ﻿using Matrix.Models;
 using Microsoft.CodeAnalysis;
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Matrix.Infrustructure
 {
     static class Current
     {
         public static ISymbol Symbol { get; set; }
-        public static IEnumerable<Example> DesignedExamples { get; set; }
+        public static IEnumerable<Example> DesignedExamples { get => JsonConvert.DeserializeObject<IEnumerable<Example>>(File.ReadAllText("DesignedExamples.json")); }
     }
 }

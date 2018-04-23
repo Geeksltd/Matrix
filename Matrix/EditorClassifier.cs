@@ -38,15 +38,6 @@ namespace Matrix
                     applicableToSpan = null;
                     return;
                 }
-                //try
-                //{
-                //    Current.DesignedExamples = JsonConvert.DeserializeObject<IEnumerable<Example>>(File.ReadAllText("DesignedExamples.json"));
-                //    Debug.WriteLine(Current.DesignedExamples.Count());
-                //}
-                //catch (Exception Ex)
-                //{
-                //    Debug.WriteLine(Ex);
-                //}
                 var navigator = m_provider.NavigatorService.GetTextStructureNavigator(m_subjectBuffer);
                 var extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
                 var symbol = CodeAnalysis.GetCurrentSymbol(extent.Span);
