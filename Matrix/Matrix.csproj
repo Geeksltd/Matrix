@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -98,6 +99,9 @@
     </Reference>
     <Reference Include="envdte80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="GCop.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GCop.Thread.1.0.4\lib\GCop.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
@@ -169,6 +173,9 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Validation.15.3.53\lib\net45\Microsoft.VisualStudio.Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MSharp.Framework, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b8f6365a003d114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSharp.Framework.3.0.144\lib\net45\MSharp.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -199,6 +206,7 @@
     <Reference Include="System.Composition.TypedParts, Version=1.0.27.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
@@ -225,6 +233,7 @@
     <Reference Include="System.Reflection.Metadata, Version=1.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.Metadata.1.4.2\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -245,10 +254,13 @@
     <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -301,6 +313,37 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\packages\GCop.All.Common.1.0.4\analyzers\dotnet\cs\GCop.All.Common.dll" />
+    <Analyzer Include="..\packages\GCop.All.Common.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.All.Geeks.1.0.4\analyzers\dotnet\cs\GCop.All.Geeks.dll" />
+    <Analyzer Include="..\packages\GCop.All.Geeks.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Collections.1.0.4\analyzers\dotnet\cs\GCop.Collections.dll" />
+    <Analyzer Include="..\packages\GCop.Collections.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Collections.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.Common.1.0.4\analyzers\dotnet\cs\GCop.Common.dll" />
+    <Analyzer Include="..\packages\GCop.Common.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Common.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.Conditional.1.0.4\analyzers\dotnet\cs\GCop.Conditional.dll" />
+    <Analyzer Include="..\packages\GCop.Conditional.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Conditional.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.ErrorHandling.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.ErrorHandling.1.0.4\analyzers\dotnet\cs\GCop.ErrorHandling.dll" />
+    <Analyzer Include="..\packages\GCop.ErrorHandling.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.IO.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.IO.1.0.4\analyzers\dotnet\cs\GCop.IO.dll" />
+    <Analyzer Include="..\packages\GCop.IO.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.Linq.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Linq.1.0.4\analyzers\dotnet\cs\GCop.Linq.dll" />
+    <Analyzer Include="..\packages\GCop.Linq.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.OliveZebbleMSharp.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.OliveZebbleMSharp.1.0.4\analyzers\dotnet\cs\GCop.OliveZebbleMSharp.dll" />
+    <Analyzer Include="..\packages\GCop.OliveZebbleMSharp.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.String.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.String.1.0.4\analyzers\dotnet\cs\GCop.String.dll" />
+    <Analyzer Include="..\packages\GCop.String.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
+    <Analyzer Include="..\packages\GCop.Thread.1.0.4\analyzers\dotnet\cs\GCop.Core.dll" />
+    <Analyzer Include="..\packages\GCop.Thread.1.0.4\analyzers\dotnet\cs\GCop.Thread.dll" />
+    <Analyzer Include="..\packages\GCop.Thread.1.0.4\analyzers\dotnet\cs\netstandard.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.6.46\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
@@ -317,9 +360,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.6.46\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.6.46\build\Microsoft.VisualStudio.Threading.Analyzers.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.targets" Condition="Exists('..\packages\Microsoft.VSSDK.BuildTools.15.6.170\build\Microsoft.VSSDK.BuildTools.targets')" />
   <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.6.46\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.6.46\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
