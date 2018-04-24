@@ -163,7 +163,7 @@ namespace Matrix.Views.ViewModels
         }
         void GenerateSample()
         {
-            var examples = Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType());
+            var examples = Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType() && x.MethodName == MyMethod.MethodName);
             if (examples.Any())
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(MyMethod, examples));
             else
