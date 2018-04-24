@@ -17,7 +17,7 @@
             </Button.Template>
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="#FFFBFB08" />
+                    <Setter Property="Foreground" Value="#ff8c00" />
                     <Setter Property="HorizontalAlignment" Value="Right"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
