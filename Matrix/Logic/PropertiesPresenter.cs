@@ -9,18 +9,18 @@ namespace Matrix.Logic
 {
     static class PropertiesPresenter
     {
-        public static IEnumerable<Parameter> GetProps(this Type type)
+        public static IEnumerable<Parameter> GetProps(this Type @this)
         {
-            foreach (var property in type.GetProperties())
+            foreach (var property in @this.GetProperties())
                 if (property.CanRead && property.CanWrite)
-                    yield return new Parameter() { Name = property.Name, Type = property.PropertyType, Value = string.Empty };
+                    yield return new Parameter { Name = property.Name, Type = property.PropertyType, Value = string.Empty };
         }
 
-        public static string ToCaption(this IEnumerable<Parameter> parameters)
+        public static string ToCaption(this IEnumerable<Parameter> @this)
         {
-            System.Diagnostics.Debug.WriteLine(parameters.Count());
+            System.Diagnostics.Debug.WriteLine(@this.Count());
             var str = new StringBuilder();
-            foreach (var param in parameters)
+            foreach (var param in @this)
                 str.AppendLine($"{param.Name}:{param.Value};");
 
             return str.ToString();
@@ -31,14 +31,14 @@ namespace Matrix.Logic
             foreach (var part in parts)
             {
                 var namevlaue = part.Split(':');
-                yield return new Parameter() { Name = namevlaue[0], Value = namevlaue[1] };
+                yield return new Parameter { Name = namevlaue[0], Value = namevlaue[1] };
             }
         }
-        public static T SetProperties<T>(this IEnumerable<Parameter> parameters, T obj)
+        public static T SetProperties<T>(this IEnumerable<Parameter> @this, T obj)
         {
-            foreach (var param in parameters)
+            foreach (var param in @this)
             {
-                PropertyInfo prop = obj.GetType().GetProperty(param.Name, BindingFlags.Public | BindingFlags.Instance);
+                var prop = obj.GetType().GetProperty(param.Name, BindingFlags.Public | BindingFlags.Instance);
                 prop.SetValue(obj, param.Value, null);
             }
             return obj;

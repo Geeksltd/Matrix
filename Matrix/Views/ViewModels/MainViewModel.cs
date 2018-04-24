@@ -62,7 +62,6 @@ namespace Matrix.Views.ViewModels
             get => _setProperties;
             set
             {
-                var a = new DateTime();
                 _setProperties = value;
                 OnPropertyChange("SetProperties");
             }
@@ -124,6 +123,7 @@ namespace Matrix.Views.ViewModels
                 }
                 catch
                 {
+                    // No logging is needed
                     SelectedCtorParameters.Clear();
                 }
                 OnPropertyChange("SelectedCtor");
@@ -157,9 +157,9 @@ namespace Matrix.Views.ViewModels
         }
         void GenerateSample()
         {
-            System.Diagnostics.Debug.WriteLine(Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType()).Any());
-            if (Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType()).Any())
-                Results.ConvertReplace(TestResultPresenter.GenerateSamples(MyMethod, Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType())));
+            var examples = Current.DesignedExamples.Where(x => x.Type == MyMethod.ClassInstance.GetType());
+            if (examples.Any())
+                Results.ConvertReplace(TestResultPresenter.GenerateSamples(MyMethod, examples));
             else
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
         }
@@ -178,13 +178,12 @@ namespace Matrix.Views.ViewModels
         private IEnumerable<KeyValuePair<object, string>> GetResultObjectOptions()
         {
             var results = Results.Select(x => x.Result).GetSelectList(ALL, CUSTOM);
-            SelectedObject = results.Where(x => x.Value == ALL).FirstOrDefault();
+            SelectedObject = results.FirstOrDefault(x => x.Value == ALL);
             return results;
         }
         private void OnPropertyChange(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

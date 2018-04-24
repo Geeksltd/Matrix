@@ -19,9 +19,9 @@ namespace Matrix.Logic
             {
                 var parameterValues = GetParameterValues(parInfos).ToList();
                 var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameterValues.ToArray());
-                yield return new TestResult()
+                yield return new TestResult
                 {
-                    Object = (method.ClassInstance == null ? "" : method.ClassInstance),
+                    Object = method.ClassInstance ?? "",
                     Result = invokeResult,
                     ParameterValue = method.ToInformation(parameterValues)
                 };
@@ -34,12 +34,12 @@ namespace Matrix.Logic
                 foreach (var item in example.SampleObjects)
                 {
                     var thisMethod = example.Type.GetMethod(example.MethodName);
-                    var invokeResult = thisMethod.Invoke(item.Instance, item.parameters.Select(x => x.Value).ToArray());
-                    yield return new TestResult()
+                    var invokeResult = thisMethod.Invoke(item.Instance, item.Parameters.Select(x => x.Value).ToArray());
+                    yield return new TestResult
                     {
                         Object = item.Instance,
                         Result = invokeResult,
-                        ParameterValue = method.ToInformation(item.parameters.Select(x => x.Value))
+                        ParameterValue = method.ToInformation(item.Parameters.Select(x => x.Value))
                     };
                 }
             }
@@ -54,7 +54,7 @@ namespace Matrix.Logic
                 instance = Activator.CreateInstance(method.ClassInstance.GetType(), selectedCtorParameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
 
             var invokeResult = method.MethodInformation.Invoke(instance, parameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
-            return new TestResult()
+            return new TestResult
             {
                 Object = instance,
                 Result = invokeResult,
@@ -65,9 +65,9 @@ namespace Matrix.Logic
         {
             var parInfos = method.MethodInformation.GetParameters();
             var invokeResult = method.MethodInformation.Invoke(method.ClassInstance, parameters.Select(x => Convert.ChangeType(x.Value, x.Type)).ToArray());
-            return new TestResult()
+            return new TestResult
             {
-                Object = (method.ClassInstance == null ? "" : method.ClassInstance),
+                Object = method.ClassInstance ?? "",
                 Result = invokeResult,
                 ParameterValue = method.ToInformation(parameters)
             };
@@ -76,7 +76,7 @@ namespace Matrix.Logic
         {
             foreach (var pInfo in parInfos)
             {
-                object param = SampleGenerator.GenerateSample(pInfo.ParameterType);
+                var param = SampleGenerator.GenerateSample(pInfo.ParameterType);
                 if (param == null)
                     throw new NullReferenceException("No matrix params");
                 else

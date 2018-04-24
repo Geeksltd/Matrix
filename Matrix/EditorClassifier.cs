@@ -12,6 +12,7 @@ using Matrix.Infrustructure;
 
 namespace Matrix
 {
+    [EscapeGCop("This class must be consistant as possible.")]
     class TestQuickInfoSource : IQuickInfoSource
     {
         TestQuickInfoSourceProvider m_provider;
@@ -68,6 +69,7 @@ namespace Matrix
         }
     }
 
+    [EscapeGCop("This class must be consistant as possible.")]
     [Export(typeof(IQuickInfoSourceProvider))]
     [Name("ToolTip QuickInfo Source")]
     [Order(After = "Default Quick Info Presenter")]
@@ -86,6 +88,7 @@ namespace Matrix
         }
     }
 
+    [EscapeGCop("This class must be consistant as possible.")]
     internal class TestQuickInfoController : IIntellisenseController
     {
         ITextView m_textView;
@@ -141,6 +144,7 @@ namespace Matrix
         }
     }
 
+    [EscapeGCop("This class must be consistant as possible.")]
     [Export(typeof(IIntellisenseControllerProvider))]
     [Name("ToolTip QuickInfo Controller")]
     [ContentType("CSharp")]

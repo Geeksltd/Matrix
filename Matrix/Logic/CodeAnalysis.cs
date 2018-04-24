@@ -18,7 +18,7 @@ namespace Matrix.Logic
             var syntax = GetCurrentDocument().GetSyntaxTree();
             var semanticModel = syntax.CreateCompilation().GetSemanticModel(syntax);
             var root = syntax.GetRoot();
-            var synNod = root.DescendantNodes().Where(x => x.FullSpan == new TextSpan(span.Start, span.Length)).FirstOrDefault();
+            var synNod = root.DescendantNodes().FirstOrDefault(x => x.FullSpan == new TextSpan(span.Start, span.Length));
             if (synNod != null)
             {
                 var symbol = semanticModel.GetSymbolInfo(synNod);
@@ -37,8 +37,8 @@ namespace Matrix.Logic
         }
 
 
-        public static SyntaxTree GetSyntaxTree(this string strCode) => CSharpSyntaxTree.ParseText(strCode);
-        public static CSharpCompilation CreateCompilation(this IEnumerable<SyntaxTree> syntaxTrees) => CSharpCompilation.Create("MyAshes", syntaxTrees: syntaxTrees, references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
-        public static CSharpCompilation CreateCompilation(this SyntaxTree syntax) => CreateCompilation(new[] { syntax });
+        public static SyntaxTree GetSyntaxTree(this string @this) => CSharpSyntaxTree.ParseText(@this);
+        public static CSharpCompilation CreateCompilation(this IEnumerable<SyntaxTree> @this) => CSharpCompilation.Create("MyAshes", syntaxTrees: @this, references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
+        public static CSharpCompilation CreateCompilation(this SyntaxTree @this) => CreateCompilation(new[] { @this });
     }
 }

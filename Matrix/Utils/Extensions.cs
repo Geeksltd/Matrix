@@ -16,9 +16,9 @@ namespace Matrix.Utils
 {
     public static class Extensions
     {
-        public static Type ToType(this string TypeName)
+        public static Type ToType(this string @this)
         {
-            var typeName = TypeName.ToUpper();
+            var typeName = @this.ToUpper();
 
             if (TypeCode.Boolean.ToString().ToUpper() == typeName)
                 return typeof(bool);
@@ -60,20 +60,20 @@ namespace Matrix.Utils
             return null;
         }
 
-        public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> original, IEnumerable<T> newItems)
+        public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> @this, IEnumerable<T> newItems)
         {
-            original.Clear();
+            @this.Clear();
             foreach (var item in newItems)
-                original.Add(item);
-            return original;
+                @this.Add(item);
+            return @this;
         }
-        public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> original, T newItem)
+        public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> @this, T newItem)
         {
-            original.Clear();
-            original.Add(newItem);
-            return original;
+            @this.Clear();
+            @this.Add(newItem);
+            return @this;
         }
-        public static bool ChangeAndNotify<T>(this PropertyChangedEventHandler handler,
+        public static bool ChangeAndNotify<T>(this PropertyChangedEventHandler @this,
             ref T field, T value, Expression<Func<T>> memberExpression)
         {
             if (memberExpression == null)
@@ -87,38 +87,38 @@ namespace Matrix.Utils
             var vmExpression = body.Expression as ConstantExpression;
             if (vmExpression != null)
             {
-                LambdaExpression lambda = Expression.Lambda(vmExpression);
-                Delegate vmFunc = lambda.Compile();
-                object sender = vmFunc.DynamicInvoke();
+                var lambda = Expression.Lambda(vmExpression);
+                var vmFunc = lambda.Compile();
+                var sender = vmFunc.DynamicInvoke();
 
-                if (handler != null)
-                    handler(sender, new PropertyChangedEventArgs(body.Member.Name));
+                if (@this != null)
+                    @this(sender, new PropertyChangedEventArgs(body.Member.Name));
             }
 
             field = value;
             return true;
         }
-        public static string ToInformation(this Method method, IEnumerable<Parameter> parameters) => ToInformation(method, parameters.Select(x => x.Value).ToList());
-        public static string ToInformation(this Method method, IEnumerable<object> parameters)
+        public static string ToInformation(this Method @this, IEnumerable<Parameter> parameters) => ToInformation(@this, parameters.Select(x => x.Value).ToList());
+        public static string ToInformation(this Method @this, IEnumerable<object> parameters)
         {
             var cnt = 1;
-            StringBuilder strBuilder = new StringBuilder();
-            strBuilder.Append(method.MethodInformation.Name).Append("(");
+            var strBuilder = new StringBuilder();
+            strBuilder.Append(@this.MethodInformation.Name).Append("(");
             foreach (var param in parameters)
             {
                 strBuilder.Append(param.ToString());
-                if (method.MethodInformation.GetParameters().Count() != cnt)
+                if (@this.MethodInformation.GetParameters().Count() != cnt)
                     strBuilder.Append(",");
                 cnt++;
             }
             strBuilder.Append(")");
             return strBuilder.ToString();
         }
-        public static IEnumerable<Parameter> ToParamaters(this ParameterInfo[] parameters)
+        public static IEnumerable<Parameter> ToParamaters(this ParameterInfo[] @this)
         {
-            foreach (var param in parameters)
+            foreach (var param in @this)
             {
-                yield return new Parameter()
+                yield return new Parameter
                 {
                     Name = param.Name,
                     Type = param.ParameterType
