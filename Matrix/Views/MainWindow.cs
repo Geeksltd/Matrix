@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Matrix
 {
-    public partial class DlgBrowser : Form
+    public partial class MainWindow : Form
     {
         public string HtmlFilePath
         {
@@ -13,7 +13,7 @@ namespace Matrix
             }
         }
 
-        public DlgBrowser()
+        public MainWindow()
         {
             InitializeComponent();
         }

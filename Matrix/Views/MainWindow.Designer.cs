@@ -1,6 +1,6 @@
 ﻿namespace Matrix
 {
-    partial class DlgBrowser
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DlgBrowser));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.mainView1 = new Matrix.Views.MainView();
             this.SuspendLayout();
@@ -43,15 +43,15 @@
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.mainView1;
             // 
-            // DlgBrowser
+            // This class name was DlgBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 700);
             this.Controls.Add(this.elementHost1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DlgBrowser";
-            this.Text = "DlgBrowser";
+            this.Name = "MainWindow";
+            this.Text = "MainWindow";
             this.ResumeLayout(false);
 
         }

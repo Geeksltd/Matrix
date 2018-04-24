@@ -63,11 +63,11 @@
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Utils\Command.cs" />
     <Compile Include="Utils\Extensions.cs" />
-    <Compile Include="Views\DlgBrowser.cs">
+    <Compile Include="Views\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DlgBrowser.Designer.cs">
-      <DependentUpon>DlgBrowser.cs</DependentUpon>
+    <Compile Include="Views\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="EditorClassifier.cs" />
     <Compile Include="Views\LinkButton.xaml.cs">
@@ -308,8 +308,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\DlgBrowser.resx">
-      <DependentUpon>DlgBrowser.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

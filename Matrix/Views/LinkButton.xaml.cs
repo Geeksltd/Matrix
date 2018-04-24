@@ -16,11 +16,11 @@ namespace Matrix
         public string FormCaption = "";
         void sampleCmd_Click(object sender, RoutedEventArgs e)
         {
-            var dlgBrowser = new DlgBrowser
+            var window = new MainWindow
             {
                 Text = FormCaption
             };
-            dlgBrowser.Show();
+            window.Show();
         }
     }
 }
