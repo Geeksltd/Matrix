@@ -73,6 +73,7 @@ namespace Matrix.Utils
             @this.Add(newItem);
             return @this;
         }
+        [EscapeGCop("It's not applicable because of MVVM")]
         public static bool ChangeAndNotify<T>(this PropertyChangedEventHandler @this,
             ref T field, T value, Expression<Func<T>> memberExpression)
         {

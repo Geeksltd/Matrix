@@ -26,6 +26,7 @@ namespace Matrix.Views.ViewModels
             Params = new ObservableCollection<Parameter>(MyMethod.MethodInformation.GetParameters().ToParamaters());
             Ctors = new ObservableCollection<KeyValuePair<object, string>>(Constructor.GetCTors(MyMethod.ClassInstance.GetType()).GetSelectList(EMPTYCTOR));
             SelectedCtorParameters = new ObservableCollection<Parameter>();
+            Results = new ObservableCollection<TestResult>();
             SelectedCtor = Ctors.FirstOrDefault();
             SetProperties = MyMethod.ClassInstance.GetType().GetProps().ToCaption();
             System.Diagnostics.Debug.WriteLine(SetProperties);
@@ -36,7 +37,7 @@ namespace Matrix.Views.ViewModels
         #region Fields
         public event PropertyChangedEventHandler PropertyChanged;
         int _generationCount = 5;
-        ObservableCollection<TestResult> _results = new ObservableCollection<TestResult>();
+        IEnumerable<KeyValuePair<object, string>> _resultObjects;
         KeyValuePair<object, string> _selectedObject;
         KeyValuePair<object, string> _selectedCtor;
         bool _isParamsVisible;
@@ -51,12 +52,21 @@ namespace Matrix.Views.ViewModels
             get => _generationCount;
             set => PropertyChanged.ChangeAndNotify(ref _generationCount, value, () => GenerationCount);
         }
+        [EscapeGCop("It's not applicable because I didn't get this")]
         public bool IsSetEnabled
         {
             get => !(SetProperties == string.Empty);
         }
         public Command SampleGeneration { get; set; }
-        public IEnumerable<KeyValuePair<object, string>> ResultObjects { get => GetResultObjectOptions(); }
+        public IEnumerable<KeyValuePair<object, string>> ResultObjects
+        {
+            get => _resultObjects;
+            set
+            {
+                _resultObjects = value;
+                OnPropertyChange("ResultObjects");
+            }
+        }
         public string SetProperties
         {
             get => _setProperties;
@@ -104,11 +114,7 @@ namespace Matrix.Views.ViewModels
                 OnPropertyChange("IsParamsVisible");
             }
         }
-        public ObservableCollection<TestResult> Results
-        {
-            get => _results;
-            set => PropertyChanged.ChangeAndNotify(ref _results, value, () => Results);
-        }
+        public ObservableCollection<TestResult> Results { get; set; }
         public ObservableCollection<Parameter> Params { get; set; }
         public ObservableCollection<KeyValuePair<object, string>> Ctors { get; set; }
         public KeyValuePair<object, string> SelectedCtor
@@ -162,7 +168,10 @@ namespace Matrix.Views.ViewModels
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(MyMethod, examples));
             else
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
+
+            SetResultObjectOptions();
         }
+        [EscapeGCop("It's not applicable because of MVVM Command pattern")]
         void GenerateSample(object parameter)
         {
             if (IsParamsVisible && IsCtorVisible)
@@ -174,17 +183,16 @@ namespace Matrix.Views.ViewModels
                 Results.ConvertReplace(TestResultPresenter.GenerateSample(MyMethod, Params));
             else
                 Results.ConvertReplace(TestResultPresenter.GenerateSamples(GenerationCount, MyMethod));
+
+            SetResultObjectOptions();
         }
-        private IEnumerable<KeyValuePair<object, string>> GetResultObjectOptions()
+        private void SetResultObjectOptions()
         {
             var results = Results.Select(x => x.Result).GetSelectList(ALL, CUSTOM);
             SelectedObject = results.FirstOrDefault(x => x.Value == ALL);
-            return results;
+            ResultObjects = results;
         }
-        private void OnPropertyChange(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChange(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         #endregion
     }
 }
