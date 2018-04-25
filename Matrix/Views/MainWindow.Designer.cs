@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.mainView1 = new Matrix.Views.MainView();
             this.SuspendLayout();
