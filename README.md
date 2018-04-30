@@ -41,3 +41,7 @@ As this is a community open source project, all kind of contributions are welcom
 - Improve the lives of the the global .NET community and make their lives easier.
 - Indirectly improve the quality of software applications across the world.
 - Geeks Ltd, a software development company in London, UK, is proud to sponsor this project. We can compensate you for your time.
+
+## Metrics
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/Geeksltd/Matrix.svg?columns=all)](https://waffle.io/Geeksltd/Matrix)<br>
+[![Throughput Graph](http://graphs.waffle.io/Geeksltd/Matrix/throughput.svg)](https://waffle.io/Geeksltd/Matrix/metrics)
