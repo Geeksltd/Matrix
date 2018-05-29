@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using Matrix.Infrustructure;
+using Matrix.Logic;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
-using Matrix.Logic;
-using Matrix.Infrustructure;
 
 namespace Matrix
 {
@@ -35,6 +35,7 @@ namespace Matrix
                     applicableToSpan = null;
                     return;
                 }
+
                 var navigator = m_provider.NavigatorService.GetTextStructureNavigator(m_subjectBuffer);
                 var extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
                 var symbol = CodeAnalysis.GetCurrentSymbol(extent.Span);

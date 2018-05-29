@@ -1,9 +1,9 @@
-﻿using Matrix.Models;
-using Microsoft.CodeAnalysis;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Matrix.Models;
+using Microsoft.CodeAnalysis;
+using Newtonsoft.Json;
 
 namespace Matrix.Infrustructure
 {

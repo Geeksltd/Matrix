@@ -1,8 +1,4 @@
-﻿using Matrix.Logic;
-using Matrix.Models;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,7 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using Matrix.Models;
+using Microsoft.CodeAnalysis;
 
 namespace Matrix.Utils
 {
@@ -67,12 +64,14 @@ namespace Matrix.Utils
                 @this.Add(item);
             return @this;
         }
+
         public static ObservableCollection<T> ConvertReplace<T>(this ObservableCollection<T> @this, T newItem)
         {
             @this.Clear();
             @this.Add(newItem);
             return @this;
         }
+
         [EscapeGCop("It's not applicable because of MVVM")]
         public static bool ChangeAndNotify<T>(this PropertyChangedEventHandler @this,
             ref T field, T value, Expression<Func<T>> memberExpression)
@@ -99,7 +98,9 @@ namespace Matrix.Utils
             field = value;
             return true;
         }
+
         public static string ToInformation(this Method @this, IEnumerable<Parameter> parameters) => ToInformation(@this, parameters.Select(x => x.Value).ToList());
+
         public static string ToInformation(this Method @this, IEnumerable<object> parameters)
         {
             var cnt = 1;
@@ -112,9 +113,11 @@ namespace Matrix.Utils
                     strBuilder.Append(",");
                 cnt++;
             }
+
             strBuilder.Append(")");
             return strBuilder.ToString();
         }
+
         public static IEnumerable<Parameter> ToParamaters(this ParameterInfo[] @this)
         {
             foreach (var param in @this)

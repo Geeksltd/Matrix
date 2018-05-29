@@ -1,12 +1,9 @@
-﻿using Matrix.Infrustructure;
-using Matrix.Models;
-using Matrix.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Matrix.Models;
+using Matrix.Utils;
 
 namespace Matrix.Logic
 {
@@ -27,6 +24,7 @@ namespace Matrix.Logic
                 };
             }
         }
+
         public static IEnumerable<TestResult> GenerateSamples(Method method, IEnumerable<Example> examples)
         {
             foreach (var example in examples)
@@ -44,6 +42,7 @@ namespace Matrix.Logic
                 }
             }
         }
+
         public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters, Constructor ctor = null, IEnumerable<Parameter> selectedCtorParameters = null)
         {
             var parInfos = method.MethodInformation.GetParameters();
@@ -61,6 +60,7 @@ namespace Matrix.Logic
                 ParameterValue = method.ToInformation(parameters)
             };
         }
+
         public static TestResult GenerateSample(Method method, IEnumerable<Parameter> parameters)
         {
             var parInfos = method.MethodInformation.GetParameters();
@@ -72,7 +72,8 @@ namespace Matrix.Logic
                 ParameterValue = method.ToInformation(parameters)
             };
         }
-        private static IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
+
+        static IEnumerable<object> GetParameterValues(ParameterInfo[] parInfos)
         {
             foreach (var pInfo in parInfos)
             {

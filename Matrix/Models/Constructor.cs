@@ -1,9 +1,9 @@
-﻿using Matrix.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Matrix.Utils;
 
 namespace Matrix.Models
 {
@@ -30,9 +30,11 @@ namespace Matrix.Models
                     strBuilder.Append(",");
                 cnt++;
             }
+
             strBuilder.Append(")");
             return strBuilder.ToString();
         }
+
         public static IEnumerable<Constructor> GetCTors(Type type)
         {
             var ctors = type.GetConstructors();

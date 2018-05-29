@@ -1,9 +1,9 @@
-﻿using Matrix.Models;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Matrix.Models;
 
 namespace Matrix.Logic
 {
@@ -25,6 +25,7 @@ namespace Matrix.Logic
 
             return str.ToString();
         }
+
         public static IEnumerable<Parameter> ExtractParams(string caption)
         {
             var parts = caption.Split(';');
@@ -34,6 +35,7 @@ namespace Matrix.Logic
                 yield return new Parameter { Name = namevlaue[0], Value = namevlaue[1] };
             }
         }
+
         public static T SetProperties<T>(this IEnumerable<Parameter> @this, T obj)
         {
             foreach (var param in @this)
@@ -41,6 +43,7 @@ namespace Matrix.Logic
                 var prop = obj.GetType().GetProperty(param.Name, BindingFlags.Public | BindingFlags.Instance);
                 prop.SetValue(obj, param.Value, null);
             }
+
             return obj;
         }
     }

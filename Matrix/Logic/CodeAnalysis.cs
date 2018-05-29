@@ -8,7 +8,6 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
 
-
 namespace Matrix.Logic
 {
     static class CodeAnalysis
@@ -26,6 +25,7 @@ namespace Matrix.Logic
                     if (symbol.Symbol.Kind == SymbolKind.Method)
                         return symbol.Symbol;
             }
+
             return null;
         }
 
@@ -36,9 +36,10 @@ namespace Matrix.Logic
             return doc.StartPoint.CreateEditPoint().GetText(doc.EndPoint);
         }
 
-
         public static SyntaxTree GetSyntaxTree(this string @this) => CSharpSyntaxTree.ParseText(@this);
+
         public static CSharpCompilation CreateCompilation(this IEnumerable<SyntaxTree> @this) => CSharpCompilation.Create("MyAshes", syntaxTrees: @this, references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
+
         public static CSharpCompilation CreateCompilation(this SyntaxTree @this) => CreateCompilation(new[] { @this });
     }
 }
